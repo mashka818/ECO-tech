@@ -118,6 +118,40 @@ document.querySelectorAll('section:not(.layers)').forEach(section => {
     observer.observe(section);
 });
 
+// Calculation Section - Speech Bubbles Animation
+const calculationObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const bubbles = entry.target.querySelectorAll('.speech-bubble');
+            const image = entry.target.querySelector('.calculation__image');
+            
+            // Reset animations
+            bubbles.forEach(bubble => {
+                bubble.style.animation = 'none';
+            });
+            if (image) image.style.animation = 'none';
+            
+            // Trigger reflow
+            void entry.target.offsetWidth;
+            
+            // Restart animations
+            bubbles.forEach(bubble => {
+                bubble.style.animation = '';
+            });
+            if (image) image.style.animation = '';
+        }
+    });
+}, {
+    threshold: 0.3,
+    rootMargin: '0px 0px -100px 0px'
+});
+
+// Observe calculation section
+const calculationSection = document.querySelector('.calculation');
+if (calculationSection) {
+    calculationObserver.observe(calculationSection);
+}
+
 // Video FAQ navigation
 document.addEventListener('DOMContentLoaded', function() {
     const grid = document.querySelector('.video-faq__grid');
@@ -138,6 +172,44 @@ document.addEventListener('DOMContentLoaded', function() {
             grid.scrollBy({
                 left: scrollAmount,
                 behavior: 'smooth'
+            });
+        });
+    }
+});
+
+// Mobile Navigation Bar
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileNavBar = document.querySelector('.mobile-nav-bar');
+    
+    if (mobileNavBar) {
+        const buttons = mobileNavBar.querySelectorAll('.mobile-nav-bar__btn');
+        
+        buttons.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                // Add click animation
+                btn.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    btn.style.transform = '';
+                }, 150);
+                
+                // Handle navigation based on button index
+                switch(index) {
+                    case 0: // Back button
+                        window.history.back();
+                        break;
+                    case 1: // Profile button
+                        console.log('Profile clicked');
+                        break;
+                    case 2: // Home button
+                        window.location.href = 'index.html';
+                        break;
+                    case 3: // Settings button
+                        console.log('Settings clicked');
+                        break;
+                    case 4: // Forward button
+                        window.history.forward();
+                        break;
+                }
             });
         });
     }
