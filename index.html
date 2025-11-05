@@ -670,82 +670,62 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contacts" id="contacts">
-        <div class="container">
-            <h2 class="contacts__title">Удобное расположение наших офисов</h2>
-        </div>
-        
-        <div class="contacts__map-wrapper">
-            <!-- Единая карта на фоне -->
-            <div id="map-main" class="contacts__map"></div>
-            
-            <!-- Информационная панель поверх карты -->
-            <div class="contacts__overlay">
-                <div class="contacts__info-card">
-                    <h3 class="contacts__card-title">Контакты</h3>
-                    <div class="contacts__card-section">
-                        <p class="contacts__card-label">Время работы:</p>
-                        <p class="contacts__card-text">Будни с 10:00 до 19:00</p>
-                        <p class="contacts__card-text">Выходные с 11:00 до 18:00</p>
+    <!-- Contact Form Section -->
+    <section class="contact-form" id="contacts">
+        <div class="contact-form__background"></div>
+        <div class="contact-form__container">
+            <div class="contact-form__info">
+                <h2 class="contact-form__title">Контакты</h2>
+                <div class="contact-form__details">
+                    <p class="contact-form__detail">
+                        <span>Телефон:</span>
+                        <a href="tel:+74999111486">8 (499) 911-14-86</a>
+                    </p>
+                    <p class="contact-form__detail">
+                        <span>Почта:</span>
+                        <a href="mailto:info@ecotechstroy.ru">info@ecotechstroy.ru</a>
+                    </p>
+                </div>
+                <div class="contact-form__addresses">
+                    <h3 class="contact-form__subtitle">Адреса</h3>
+                    <div class="contact-form__address">
+                        <p class="contact-form__address-name">Главный офис: Москва, 51-й км МКАД</p>
+                        <p class="contact-form__address-time">Открыто: 10:00-19:00</p>
                     </div>
-                    <div class="contacts__card-section">
-                        <p class="contacts__card-label">Вопросы и предложения:</p>
-                        <p class="contacts__card-text">Телефон: <a href="tel:+74999111486">8 (499) 911-14-86</a></p>
-                        <p class="contacts__card-text">Почта: <a href="mailto:info@ecotechstroy.ru">info@ecotechstroy.ru</a></p>
+                    <div class="contact-form__address">
+                        <p class="contact-form__address-name">Выставочная площадка Наро-Фоминск</p>
+                        <p class="contact-form__address-time">Открыто: 10:00-19:00</p>
                     </div>
                 </div>
-
-                <div class="contacts__info-card contacts__info-card--addresses">
-                    <h3 class="contacts__card-title">Адреса</h3>
-                    
-                    <div class="contacts__location">
-                        <div class="contacts__location-name">Выставочная площадка, Москва, 51-й км МКАД</div>
-                        <div class="contacts__location-time">Открыто: 10:00-19:00</div>
-                        <div class="contacts__location-distance">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                            <span>5 мин</span>
-                        </div>
-                    </div>
-
-                    <div class="contacts__location">
-                        <div class="contacts__location-name">Выставочная площадка Наро-Фоминск</div>
-                        <div class="contacts__location-time">Открыто: 10:00-19:00</div>
-                        <div class="contacts__location-distance">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                            <span>10 мин</span>
-                        </div>
-                    </div>
-
-                    <div class="contacts__location">
-                        <div class="contacts__location-name">Производство: Архангельская область, п. Советский, ул. Промышленная, д. 22Б</div>
-                        <div class="contacts__location-distance">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                            <span>15 мин</span>
-                        </div>
-                    </div>
+                <div class="contact-form__schedule">
+                    <h3 class="contact-form__subtitle">5 мин</h3>
+                    <p>от метро "М"</p>
+                    <h3 class="contact-form__subtitle">10 мин</h3>
+                    <p>от метро "М"</p>
+                    <h3 class="contact-form__subtitle">15 мин</h3>
+                    <p>от метро "З"</p>
                 </div>
             </div>
-
-            <!-- Кнопка внизу карты по центру -->
-            <button class="contacts__map-button">
-                Открыть на карте
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/>
-                    <polyline points="8 2 8 18"/>
-                    <polyline points="16 6 16 22"/>
-                </svg>
-            </button>
+            <div class="contact-form__form-wrapper">
+                <p class="contact-form__question">У вас появились вопросы? — Мы здесь, чтобы помочь</p>
+                <form class="contact-form__form">
+                    <input type="email" placeholder="Email*" class="contact-form__input" required>
+                    <input type="text" placeholder="Имя*" class="contact-form__input" required>
+                    <input type="tel" placeholder="Телефон*" class="contact-form__input" required>
+                    <textarea placeholder="Комментарий" class="contact-form__textarea"></textarea>
+                    <button type="submit" class="contact-form__submit">Отправить</button>
+                    <label class="contact-form__checkbox">
+                        <input type="checkbox" required>
+                        <span>Я подтверждаю, что ознакомился(ась) с соглашением о dao свой согласие на обработку моих персональных данных</span>
+                    </label>
+                </form>
+            </div>
         </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div id="map-main" class="map-section__map"></div>
     </section>
 
     <!-- Mobile Navigation Bar -->
@@ -831,48 +811,36 @@
     <!-- Yandex Maps API -->
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script>
-        // Инициализация единой карты с несколькими маркерами
+        // Инициализация карты с несколькими маркерами
         ymaps.ready(init);
         function init(){
             var mainMap = new ymaps.Map("map-main", {
-                center: [55.750, 37.600], // Центр Москвы
-                zoom: 10,
-                controls: []
-            }, {
-                // Отключаем управление картой для удобной прокрутки
-                suppressMapOpenBlock: true,
-                yandexMapDisablePoiInteractivity: true
+                center: [55.542, 37.131], // Центр между двумя точками
+                zoom: 9,
+                controls: ['zoomControl', 'fullscreenControl']
             });
 
-            // ПОЛНОСТЬЮ отключаем все взаимодействия с картой
-            mainMap.behaviors.disable(['scrollZoom', 'drag', 'dblClickZoom', 'rightMouseButtonMagnifier', 'multiTouch']);
-
-            // Маркер 1: Выставочная площадка, Москва, 51-й км МКАД
+            // Маркер 1: Выставочная площадка МКА, Москва, 51-й км МКАД
             var placemark1 = new ymaps.Placemark([55.698038, 37.529800], {
-                balloonContent: '<strong>Выставочная площадка</strong><br>Москва, 51-й км МКАД<br>Открыто: 10:00-19:00<br>5 мин',
-                hintContent: 'Выставочная площадка, МКАД'
+                balloonContent: '<div style="padding: 10px;"><strong style="font-size: 16px; color: #2D5A3D;">Выставочная площадка МКА</strong><br><span style="font-size: 14px;">Москва, 51-й км МКАД</span><br><span style="font-size: 13px; color: #666;">Открыто: 10:00-19:00</span></div>',
+                hintContent: 'Выставочная площадка МКА'
             }, {
-                preset: 'islands#greenHomeIcon',
-                iconColor: '#2D5A3D'
+                preset: 'islands#greenDotIcon',
+                iconColor: '#5B8C69'
             });
 
             // Маркер 2: Выставочная площадка Наро-Фоминск
             var placemark2 = new ymaps.Placemark([55.386667, 36.733333], {
-                balloonContent: '<strong>Выставочная площадка Наро-Фоминск</strong><br>Открыто: 10:00-19:00<br>10 мин',
-                hintContent: 'Наро-Фоминск'
+                balloonContent: '<div style="padding: 10px;"><strong style="font-size: 16px; color: #2D5A3D;">Выставочная площадка Наро-Фоминск</strong><br><span style="font-size: 13px; color: #666;">Открыто: 10:00-19:00</span></div>',
+                hintContent: 'Выставочная площадка Наро-Фоминск'
             }, {
-                preset: 'islands#greenHomeIcon',
-                iconColor: '#2D5A3D'
+                preset: 'islands#greenDotIcon',
+                iconColor: '#5B8C69'
             });
 
             // Добавляем маркеры на карту
             mainMap.geoObjects.add(placemark1);
             mainMap.geoObjects.add(placemark2);
-
-            // Открыть карту в новом окне при клике на кнопку
-            document.querySelector('.contacts__map-button').addEventListener('click', function() {
-                window.open('https://yandex.ru/maps/?rtext=~55.698038,37.529800', '_blank');
-            });
         }
     </script>
 
