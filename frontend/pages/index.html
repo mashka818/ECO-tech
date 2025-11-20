@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЭКО-ТЕХ - Деревянные дома</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__logo">
+                    <img src="../../backend/uploads/logo_fin1.png" alt="ЭКО-ТЕХ" class="logo-img">
+                </div>
+                <button class="mobile-menu-btn" aria-label="Меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="header__nav">
+                    <button class="nav-link nav-link--menu">Меню</button>
+                    <a href="#catalog" class="nav-link">
+                        Проекты
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="nav-link__arrow">
+                            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#completed" class="nav-link">
+                        Построенные дома
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="nav-link__arrow">
+                            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#mediahub" class="nav-link">
+                        Медиахаб
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="nav-link__arrow">
+                            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#clients" class="nav-link">
+                        Для клиентов
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="nav-link__arrow">
+                            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#about" class="nav-link">
+                        О компании
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="nav-link__arrow">
+                            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="#services" class="nav-link">
+                        Услуги
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" class="nav-link__arrow">
+                            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </nav>
+                <div class="header__right">
+                    <a href="tel:+74999111486" class="header__phone">8 (499) 911-14-86</a>
+                    <button class="header__favorite" aria-label="Избранное">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M9 15.75L3.1125 9.8625C1.9125 8.6625 1.9125 6.7875 3.1125 5.5875C4.3125 4.3875 6.1875 4.3875 7.3875 5.5875L9 7.2L10.6125 5.5875C11.8125 4.3875 13.6875 4.3875 14.8875 5.5875C16.0875 6.7875 16.0875 8.6625 14.8875 9.8625L9 15.75Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="header__search" aria-label="Поиск">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M16.5 16.5L12.375 12.375M14.25 8.25C14.25 11.5637 11.5637 14.25 8.25 14.25C4.93629 14.25 2.25 11.5637 2.25 8.25C2.25 4.93629 4.93629 2.25 8.25 2.25C11.5637 2.25 14.25 4.93629 14.25 8.25Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero__content">
+                <div class="hero__top">
+                    <div class="hero__text">
+                        <h1 class="hero__title">Мы — лидеры рынка России <br/>по строительству деревянных домов</h1>
+                        <p class="hero__description">Сами заготавливаем северный лес в Архангельской области, а потом строим дом «под ключ». <br/>Построили 302 дома за 2024 год. Всего же за 26 лет построили свыше 5000 домов.</p>
+                    </div>
+                    <div class="hero__cta">
+                        <div class="hero__cta-buttons">
+                            <button class="btn btn--primary">Рассчитать стоимость дома</button>
+                            <button class="btn btn--white">Задать вопрос в WhatsApp</button>
+                        </div>
+                        <div class="hero__cta-note">Ответим в течение 10 минут</div>
+                    </div>
+                </div>
+                <div class="hero__images">
+                    <div class="hero__main-image">
+                        <img src="../../backend/uploads/istra-00001 1.jpg" alt="Дом из клееного бруса «Истра»">
+                        <div class="hero__main-badge">Наши авторские проекты</div>
+                        <div class="hero__main-navigation">
+                            <button class="hero__nav-btn hero__nav-btn--prev" aria-label="Предыдущий">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <button class="hero__nav-btn hero__nav-btn--next" aria-label="Следующий">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <div class="hero__main-info">
+                                <h2 class="hero__main-title">Дом из клееного бруса «Истра»</h2>
+                                <div class="hero__main-area">137 м²</div>
+                            </div>
+                        </div>
+                        <div class="hero__main-overlay"></div>
+                    </div>
+                    <div class="hero__side-images">
+                        <div class="hero__side-card">
+                            <div class="hero__side-item">
+                                <img src="../../backend/uploads/istra-00001 1.jpg" alt="2 выставочные площадки">
+                                <div class="hero__side-badge">2 выставочные площадки</div>
+                                <div class="hero__side-overlay">
+                                    <h3 class="hero__side-title">Посмотрите, как выглядят наши дома вживую</h3>
+                                </div>
+                            </div>
+                            <div class="hero__side-info">
+                                <div class="hero__side-check">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                        <path d="M11.6667 3.5L5.25 9.91667L2.33334 7" stroke="#578C62" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span>Москва, 51-й км МКАД</span>
+                                </div>
+                                <div class="hero__side-check">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                        <path d="M11.6667 3.5L5.25 9.91667L2.33334 7" stroke="#578C62" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span>Наро-Фоминск</span>
+                                </div>
+                                <a href="#" class="hero__side-link">Подробнее про выставочные площадки</a>
+                            </div>
+                        </div>
+                        <div class="hero__side-card">
+                            <div class="hero__side-item">
+                                <img src="../../backend/uploads/istra-00001 1.jpg" alt="Собственная лесозаготовка">
+                                <div class="hero__side-badge">Видео о том, как создаётся идеальный дом</div>
+                                <div class="hero__side-overlay">
+                                    <button class="hero__side-play">
+                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                            <circle cx="9" cy="9" r="8.5" stroke="white" stroke-width="1"/>
+                                            <path d="M7 5L13 9L7 13V5Z" fill="white"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="hero__side-info">
+                                <div class="hero__side-check">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                        <path d="M11.6667 3.5L5.25 9.91667L2.33334 7" stroke="#578C62" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span>Собственная лесозаготовка</span>
+                                </div>
+                                <div class="hero__side-check">
+                                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                        <path d="M11.6667 3.5L5.25 9.91667L2.33334 7" stroke="#578C62" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span>4 цеха в Архангельской области</span>
+                                </div>
+                                <a href="#" class="hero__side-link">Подробнее о нашей лесозаготовке</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Hub -->
+    <section class="mediahub" id="mediahub">
+        <div class="container">
+            <div class="mediahub__header">
+                <div class="mediahub__header-left">
+                    <h2 class="section-title">Медиахаб</h2>
+                    <p class="mediahub__subtitle">Посмотрите наши видео о том, как мы подходим к строительству домов</p>
+                </div>
+                <div class="mediahub__navigation">
+                    <button class="mediahub__nav-btn mediahub__nav-btn--prev" aria-label="Предыдущий">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="mediahub__nav-btn mediahub__nav-btn--next" aria-label="Следующий">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="mediahub__grid-wrapper">
+                <div class="mediahub__grid">
+                    <div class="mediahub__card">
+                        <div class="mediahub__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Обзор завершенного проекта">
+                            <button class="mediahub__play-btn" aria-label="Играть видео">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <circle cx="9" cy="9" r="8.5" stroke="white" stroke-width="1"/>
+                                    <path d="M7 5L13 9L7 13V5Z" fill="white"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="mediahub__content">
+                            <h3 class="mediahub__title">Обзор завершенного проекта дома из клееного бруса 200 м2</h3>
+                        </div>
+                    </div>
+                    <div class="mediahub__card">
+                        <div class="mediahub__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Интервью с заказчиком">
+                            <button class="mediahub__play-btn" aria-label="Играть видео">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <circle cx="9" cy="9" r="8.5" stroke="white" stroke-width="1"/>
+                                    <path d="M7 5L13 9L7 13V5Z" fill="white"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="mediahub__content">
+                            <h3 class="mediahub__title">Интервью с заказчиком и осмотр дома из оцилиндрованного бревна</h3>
+                        </div>
+                    </div>
+                    <div class="mediahub__card">
+                        <div class="mediahub__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Обзор выставки">
+                            <button class="mediahub__play-btn" aria-label="Играть видео">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <circle cx="9" cy="9" r="8.5" stroke="white" stroke-width="1"/>
+                                    <path d="M7 5L13 9L7 13V5Z" fill="white"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="mediahub__content">
+                            <h3 class="mediahub__title">Обзор выставки домов</h3>
+                        </div>
+                    </div>
+                    <div class="mediahub__card">
+                        <div class="mediahub__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Обзор проекта">
+                            <button class="mediahub__play-btn" aria-label="Играть видео">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <circle cx="9" cy="9" r="8.5" stroke="white" stroke-width="1"/>
+                                    <path d="M7 5L13 9L7 13V5Z" fill="white"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="mediahub__content">
+                            <h3 class="mediahub__title">Обзор выполненного проекта от ЭкоТех</h3>
+                        </div>
+                    </div>
+                    <div class="mediahub__card">
+                        <div class="mediahub__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Экскурсия">
+                            <button class="mediahub__play-btn" aria-label="Играть видео">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <circle cx="9" cy="9" r="8.5" stroke="white" stroke-width="1"/>
+                                    <path d="M7 5L13 9L7 13V5Z" fill="white"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="mediahub__content">
+                            <h3 class="mediahub__title">Экскурсия по обработке сырого материала</h3>
+                        </div>
+                    </div>
+                    <div class="mediahub__card">
+                        <div class="mediahub__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Обзор проекта">
+                            <button class="mediahub__play-btn" aria-label="Играть видео">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <circle cx="9" cy="9" r="8.5" stroke="white" stroke-width="1"/>
+                                    <path d="M7 5L13 9L7 13V5Z" fill="white"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="mediahub__content">
+                            <h3 class="mediahub__title">Обзор выполненного проекта от ЭкоТех</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn--white">Смотреть все видео</button>
+        </div>
+    </section>
+
+    <!-- Offers -->
+    <section class="offers">
+        <div class="container">
+            <h2 class="section-title">Акции и спецпредложения</h2>
+            <div class="offers__grid">
+                <div class="offer-card offer-card--dark">
+                    <div class="offer-card__content">
+                        <div class="offer-card__badge">11.11</div>
+                        <h3 class="offer-card__title">Скидки на все дома</h3>
+                    </div>
+                </div>
+                <div class="offer-card offer-card--dark">
+                    <div class="offer-card__content">
+                        <h3 class="offer-card__title">Бесплатная экскурсия на производство в Архангельскую область</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Projects -->
+    <section class="projects" id="catalog">
+        <div class="container">
+            <div class="projects__header">
+                <h2 class="section-title">Популярные проекты домов</h2>
+                <p class="projects__subtitle">Все дома можно адаптировать под ваш участок, бюджет и стиль жизни.</p>
+            </div>
+            <div class="projects__filters">
+                <button class="filter-btn filter-btn--active">Все • 217</button>
+                <button class="filter-btn">Дом из клееного бруса • 98</button>
+                <button class="filter-btn">Каркасные дома • 78</button>
+                <button class="filter-btn">Из оцилиндрованного бревна • 56</button>
+                <button class="filter-btn">Дома ручной рубки • 49</button>
+                <button class="filter-btn">Бани • 10</button>
+                <button class="filter-btn filter-btn--catalog">Перейти в каталог</button>
+            </div>
+            <div class="projects__grid">
+                <div class="project-card">
+                    <div class="project-card__image-wrapper">
+                        <img src="../../backend/uploads/istra-00001 1.jpg" alt="Дом из клееного бруса «Тосно»" class="project-card__image">
+                        <div class="project-card__tags">
+                            <span class="project-card__tag">1 этаж</span>
+                            <span class="project-card__tag">клеёный брус</span>
+                        </div>
+                        <button class="project-card__like">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 14L3.65 9.65C2.62 8.62 2.62 7.03 3.65 6C4.68 4.97 6.27 4.97 7.3 6L8 6.7L8.7 6C9.73 4.97 11.32 4.97 12.35 6C13.38 7.03 13.38 8.62 12.35 9.65L8 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-card__content">
+                        <div class="project-card__header">
+                            <div class="project-card__price">7 920 900 ₽</div>
+                            <div class="project-card__specs">
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M2 8h12M2 4h12M2 12h12" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">137 м²</span>
+                                <span class="project-card__spec-separator">•</span>
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <rect x="3" y="4" width="10" height="8" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">2</span>
+                                <span class="project-card__spec-separator">•</span>
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 2v12M5 8h6" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">3</span>
+                            </div>
+                        </div>
+                        <h3 class="project-card__title">Дом из клееного бруса «Тосно»</h3>
+                        <p class="project-card__description">Дом с большой гостинной и 3 спальнями</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-card__image-wrapper">
+                        <img src="../../backend/uploads/istra-00001 1.jpg" alt="Дом «Краснодар»" class="project-card__image">
+                        <div class="project-card__tags">
+                            <span class="project-card__tag">1 этаж</span>
+                            <span class="project-card__tag">клеёный брус</span>
+                        </div>
+                        <button class="project-card__like">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 14L3.65 9.65C2.62 8.62 2.62 7.03 3.65 6C4.68 4.97 6.27 4.97 7.3 6L8 6.7L8.7 6C9.73 4.97 11.32 4.97 12.35 6C13.38 7.03 13.38 8.62 12.35 9.65L8 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-card__content">
+                        <div class="project-card__header">
+                            <div class="project-card__price">5 743 000 ₽</div>
+                            <div class="project-card__specs">
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M2 8h12M2 4h12M2 12h12" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">90 м²</span>
+                                <span class="project-card__spec-separator">•</span>
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <rect x="3" y="4" width="10" height="8" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">2</span>
+                                <span class="project-card__spec-separator">•</span>
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 2v12M5 8h6" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">3</span>
+                            </div>
+                        </div>
+                        <h3 class="project-card__title">Дом «Краснодар»</h3>
+                        <p class="project-card__description">Одноэтажный дом из клееного бруса с террасой</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-card__image-wrapper">
+                        <img src="../../backend/uploads/istra-00001 1.jpg" alt="Коттедж «Новомещерский»" class="project-card__image">
+                        <div class="project-card__tags">
+                            <span class="project-card__tag">2 этажа</span>
+                            <span class="project-card__tag">клеёный брус</span>
+                        </div>
+                        <button class="project-card__like project-card__like--active">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 14L3.65 9.65C2.62 8.62 2.62 7.03 3.65 6C4.68 4.97 6.27 4.97 7.3 6L8 6.7L8.7 6C9.73 4.97 11.32 4.97 12.35 6C13.38 7.03 13.38 8.62 12.35 9.65L8 14Z" fill="#FF0032" stroke="#FF0032" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-card__content">
+                        <div class="project-card__header">
+                            <div class="project-card__price">22 149 000 ₽</div>
+                            <div class="project-card__specs">
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M2 8h12M2 4h12M2 12h12" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">320 м²</span>
+                                <span class="project-card__spec-separator">•</span>
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <rect x="3" y="4" width="10" height="8" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">2</span>
+                                <span class="project-card__spec-separator">•</span>
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 2v12M5 8h6" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">3</span>
+                            </div>
+                        </div>
+                        <h3 class="project-card__title">Коттедж «Новомещерский»</h3>
+                        <p class="project-card__description">Двухэтажный дом с сауной и зимним садом</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-card__image-wrapper">
+                        <img src="../../backend/uploads/istra-00001 1.jpg" alt="Дом из клееного бруса «Тосно»" class="project-card__image">
+                        <div class="project-card__tags">
+                            <span class="project-card__tag">1 этаж</span>
+                            <span class="project-card__tag">клеёный брус</span>
+                        </div>
+                        <button class="project-card__like">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 14L3.65 9.65C2.62 8.62 2.62 7.03 3.65 6C4.68 4.97 6.27 4.97 7.3 6L8 6.7L8.7 6C9.73 4.97 11.32 4.97 12.35 6C13.38 7.03 13.38 8.62 12.35 9.65L8 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-card__content">
+                        <div class="project-card__header">
+                            <div class="project-card__price">7 920 900 ₽</div>
+                            <div class="project-card__specs">
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M2 8h12M2 4h12M2 12h12" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">137 м²</span>
+                                <span class="project-card__spec-separator">•</span>
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <rect x="3" y="4" width="10" height="8" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">2</span>
+                                <span class="project-card__spec-separator">•</span>
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 2v12M5 8h6" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">3</span>
+                            </div>
+                        </div>
+                        <h3 class="project-card__title">Дом из клееного бруса «Тосно»</h3>
+                        <p class="project-card__description">Дом с большой гостинной и 3 спальнями</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-card__image-wrapper">
+                        <img src="../../backend/uploads/istra-00001 1.jpg" alt="Дом «Краснодар»" class="project-card__image">
+                        <div class="project-card__tags">
+                            <span class="project-card__tag">1 этаж</span>
+                            <span class="project-card__tag">клеёный брус</span>
+                        </div>
+                        <button class="project-card__like">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 14L3.65 9.65C2.62 8.62 2.62 7.03 3.65 6C4.68 4.97 6.27 4.97 7.3 6L8 6.7L8.7 6C9.73 4.97 11.32 4.97 12.35 6C13.38 7.03 13.38 8.62 12.35 9.65L8 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-card__content">
+                        <div class="project-card__header">
+                            <div class="project-card__price">5 743 000 ₽</div>
+                            <div class="project-card__specs">
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M2 8h12M2 4h12M2 12h12" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">90 м²</span>
+                                <span class="project-card__spec-separator">•</span>
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <rect x="3" y="4" width="10" height="8" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">2</span>
+                                <span class="project-card__spec-separator">•</span>
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 2v12M5 8h6" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">3</span>
+                            </div>
+                        </div>
+                        <h3 class="project-card__title">Дом «Краснодар»</h3>
+                        <p class="project-card__description">Одноэтажный дом из клееного бруса с террасой</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-card__image-wrapper">
+                        <img src="../../backend/uploads/istra-00001 1.jpg" alt="Коттедж «Новомещерский»" class="project-card__image">
+                        <div class="project-card__tags">
+                            <span class="project-card__tag">2 этажа</span>
+                            <span class="project-card__tag">клеёный брус</span>
+                        </div>
+                        <button class="project-card__like">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 14L3.65 9.65C2.62 8.62 2.62 7.03 3.65 6C4.68 4.97 6.27 4.97 7.3 6L8 6.7L8.7 6C9.73 4.97 11.32 4.97 12.35 6C13.38 7.03 13.38 8.62 12.35 9.65L8 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="project-card__content">
+                        <div class="project-card__header">
+                            <div class="project-card__price">22 149 000 ₽</div>
+                            <div class="project-card__specs">
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M2 8h12M2 4h12M2 12h12" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">320 м²</span>
+                                <span class="project-card__spec-separator">•</span>
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <rect x="3" y="4" width="10" height="8" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">2</span>
+                                <span class="project-card__spec-separator">•</span>
+                                <span class="project-card__spec-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 2v12M5 8h6" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </span>
+                                <span class="project-card__spec-value">3</span>
+                            </div>
+                        </div>
+                        <h3 class="project-card__title">Коттедж «Новомещерский»</h3>
+                        <p class="project-card__description">Двухэтажный дом с сауной и зимним садом</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn--primary">
+                Смотреть все проекты
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="philosophy">
+        <div class="container">
+            <div class="philosophy__header">
+                <div>
+                    <h2 class="section-title">Единственные в России сами заготавливаем лес и сами строим</h2>
+                    <p class="philosophy__description">Мы — единственная в России компания по строительству деревянных домов, которая обеспецивает полный цикл строительства «под ключ»: от собственной лесозаготовки до строительства и отделки.</p>
+                </div>
+                <div class="philosophy__nav">
+                    <button class="philosophy__nav-btn philosophy__nav-btn--prev" type="button">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="philosophy__nav-btn philosophy__nav-btn--next" type="button">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="philosophy__grid-wrapper">
+                <div class="philosophy__grid">
+                    <div class="philosophy__card">
+                        <div class="philosophy__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Сами заготавливаем лес" class="philosophy__image">
+                            <button class="philosophy__play-btn">
+                                <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                                    <path d="M1 1L9 6L1 11V1Z" fill="#578C62" stroke="#578C62" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="philosophy__text">Сами заготавливаем лес</p>
+                    </div>
+                    <div class="philosophy__card">
+                        <div class="philosophy__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Обеспечиваем логистику" class="philosophy__image">
+                            <button class="philosophy__play-btn">
+                                <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                                    <path d="M1 1L9 6L1 11V1Z" fill="#578C62" stroke="#578C62" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="philosophy__text">Обеспечиваем логистику</p>
+                    </div>
+                    <div class="philosophy__card">
+                        <div class="philosophy__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Разрабатываем архитектурный проект" class="philosophy__image">
+                            <button class="philosophy__play-btn">
+                                <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                                    <path d="M1 1L9 6L1 11V1Z" fill="#578C62" stroke="#578C62" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="philosophy__text">Разрабатываем архитектурный проект</p>
+                    </div>
+                    <div class="philosophy__card">
+                        <div class="philosophy__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Выполняем конструкторскую работу" class="philosophy__image">
+                            <button class="philosophy__play-btn">
+                                <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                                    <path d="M1 1L9 6L1 11V1Z" fill="#578C62" stroke="#578C62" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="philosophy__text">Выполняем конструкторскую работу</p>
+                    </div>
+                    <div class="philosophy__card">
+                        <div class="philosophy__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Строим дом" class="philosophy__image">
+                            <button class="philosophy__play-btn">
+                                <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                                    <path d="M1 1L9 6L1 11V1Z" fill="#578C62" stroke="#578C62" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="philosophy__text">Строим дом</p>
+                    </div>
+                    <div class="philosophy__card">
+                        <div class="philosophy__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Осущетсвляем технадзор" class="philosophy__image">
+                            <button class="philosophy__play-btn">
+                                <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                                    <path d="M1 1L9 6L1 11V1Z" fill="#578C62" stroke="#578C62" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="philosophy__text">Осущетсвляем технадзор</p>
+                    </div>
+                    <div class="philosophy__card">
+                        <div class="philosophy__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Выполняем конструкторскую работу" class="philosophy__image">
+                            <button class="philosophy__play-btn">
+                                <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                                    <path d="M1 1L9 6L1 11V1Z" fill="#578C62" stroke="#578C62" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="philosophy__text">Выполняем конструкторскую работу</p>
+                    </div>
+                    <div class="philosophy__card">
+                        <div class="philosophy__item">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Осущетсвляем технадзор" class="philosophy__image">
+                            <button class="philosophy__play-btn">
+                                <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                                    <path d="M1 1L9 6L1 11V1Z" fill="#578C62" stroke="#578C62" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="philosophy__text">Осущетсвляем технадзор</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team">
+        <div class="container">
+            <div class="team__header">
+                <div>
+                    <h2 class="section-title">В нашей команде работает свыше 800 специалистов своего дела</h2>
+                    <p class="team__description">Компания «ЭКО-ТЕХ» находится на рынке строительства и отделки деревянных домов с 1999 года. За время работы нашей компании была сформирована опытная команда высококвалифицированных специалистов в области строительства деревянных домов.</p>
+                </div>
+                <div class="team__nav">
+                    <button class="team__nav-btn team__nav-btn--prev" type="button">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="team__nav-btn team__nav-btn--next" type="button">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="team__grid-wrapper">
+                <div class="team__grid">
+                <div class="team-member">
+                    <div class="team-member__photo">
+                        <img src="https://www.figma.com/api/mcp/asset/313577a2-950e-427c-8bef-933529360025" alt="Алимов Эмиль Тофикович">
+                    </div>
+                    <div class="team-member__info">
+                        <h3 class="team-member__name">Алимов <br/>Эмиль Тофикович</h3>
+                        <p class="team-member__position">Генеральный директор, управление компанией</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-member__photo">
+                        <img src="https://www.figma.com/api/mcp/asset/8bb7598f-1a18-4284-9e0f-4d02a5fa49a4" alt="Каменская Ирина Валерьевна">
+                    </div>
+                    <div class="team-member__info">
+                        <h3 class="team-member__name">Каменская <br/>Ирина Валерьевна</h3>
+                        <p class="team-member__position">Финансовый директор строительного отдела</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-member__photo">
+                        <img src="https://www.figma.com/api/mcp/asset/057e4e84-15c8-47a0-8dbc-13aff2889980" alt="Голубева Мария Александровна">
+                    </div>
+                    <div class="team-member__info">
+                        <h3 class="team-member__name">Голубева <br/>Мария Александровна</h3>
+                        <p class="team-member__position">Бухгалтер строительного отдела</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-member__photo">
+                        <img src="https://www.figma.com/api/mcp/asset/05cc79d2-3f4d-42c7-a8f9-62335df04feb" alt="Прожерин Евгений Викторович">
+                    </div>
+                    <div class="team-member__info">
+                        <h3 class="team-member__name">Прожерин <br/>Евгений Викторович</h3>
+                        <p class="team-member__position">Генеральный директор производства</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-member__photo">
+                        <img src="https://www.figma.com/api/mcp/asset/3a57b83c-9f91-4aec-b791-68b1e66f2ca5" alt="Бачернихина Мария Юрьевна">
+                    </div>
+                    <div class="team-member__info">
+                        <h3 class="team-member__name">Бачернихина <br/>Мария Юрьевна</h3>
+                        <p class="team-member__position">Финансовый директор производства</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-member__photo">
+                        <img src="https://www.figma.com/api/mcp/asset/f98af73e-6dfe-471c-b74b-ed275cfafed4" alt="Полосков Семен Николаевич">
+                    </div>
+                    <div class="team-member__info">
+                        <h3 class="team-member__name">Полосков <br/>Семен Николаевич</h3>
+                        <p class="team-member__position">Заместитель генерального директора по производству</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-member__photo">
+                        <img src="https://www.figma.com/api/mcp/asset/7de70e12-e2b0-4f8a-a866-0e8f9d0f413f" alt="Иванова Марина Геннадьевна">
+                    </div>
+                    <div class="team-member__info">
+                        <h3 class="team-member__name">Иванова <br/>Марина Геннадьевна</h3>
+                        <p class="team-member__position">Бухгалтер производства</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-member__photo">
+                        <img src="https://www.figma.com/api/mcp/asset/26bab09e-1ae8-48ac-b8d4-e510029324b0" alt="Коваленок Никита Юрьевич">
+                    </div>
+                    <div class="team-member__info">
+                        <h3 class="team-member__name">Коваленок <br/>Никита Юрьевич</h3>
+                        <p class="team-member__position">Заместитель генерального директора по логистике и ВЭД</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <button class="btn btn--white team__btn">Смотреть всю команду</button>
+        </div>
+    </section>
+
+    <!-- Banner -->
+    <section class="banner">
+        <img src="https://www.figma.com/api/mcp/asset/8ecc8ea5-dc17-4d67-94e4-1c852d2445ea" alt="Производство" class="banner__image">
+    </section>
+
+    <!-- Production -->
+    <section class="production">
+        <div class="container">
+            <h2 class="production__title">Собственное лесозаготовительное производство северного леса — одно из наших ключевых отличий</h2>
+            <div class="production__content">
+                <div class="production__info">
+                    <p class="production__text">Мы контролируем и отвечаем за каждый этап: от заготовки леса до отделки дома. Наличие собственных цехов по производству и обработке древесины, позволяют снижать цены для вашей выгоды. Наших делянках в Архангельской области мы сами заготавливаем качественный северный лес хвойных пород.</p>
+                    <button class="btn btn--primary production__btn">Подробнее о производстве</button>
+                </div>
+                <div class="production__grid">
+                    <div class="production__item">
+                        <div class="production__image-wrapper">
+                            <img src="https://www.figma.com/api/mcp/asset/376df314-7b96-4028-a906-5ef318cc8635" alt="Производство 1" class="production__image">
+                            <div class="production__controls">
+                                <button class="production__arrow production__arrow--left" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="production__arrow production__arrow--right" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="production__dots">
+                            <span class="production__dot production__dot--active"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                        </div>
+                        <p class="production__item-text">Ежемесячный выпуск продукции составляет более 10 000 м³, включая пиломатериалы, клееный брус, термодоску и другие изделия.</p>
+                    </div>
+                    <div class="production__item">
+                        <div class="production__image-wrapper">
+                            <img src="https://www.figma.com/api/mcp/asset/e0566b35-dd2b-4cc4-9534-75831b52e904" alt="Производство 2" class="production__image">
+                            <div class="production__controls">
+                                <button class="production__arrow production__arrow--left" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="production__arrow production__arrow--right" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="production__dots">
+                            <span class="production__dot production__dot--active"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                        </div>
+                        <p class="production__item-text">Линия распиловки «Крафтер» обеспечивает высокую точность при обработке древесины и максимальную эффективность: более 200 м³ пиломатериалов в смену.</p>
+                    </div>
+                    <div class="production__item">
+                        <div class="production__image-wrapper">
+                            <img src="https://www.figma.com/api/mcp/asset/c4a8601f-b267-499c-9fbc-49d6d889dd5c" alt="Производство 3" class="production__image">
+                            <div class="production__controls">
+                                <button class="production__arrow production__arrow--left" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="production__arrow production__arrow--right" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="production__dots">
+                            <span class="production__dot production__dot--active"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                        </div>
+                        <p class="production__item-text">Линия позволяет нам выпускать клееный брус различных сечений и длиной до 14,5 м и с объемом более 2 000 м³ в месяц, идеально подходящий для строительства домов.</p>
+                    </div>
+                    <div class="production__item">
+                        <div class="production__image-wrapper">
+                            <img src="https://www.figma.com/api/mcp/asset/496ed162-4886-4eed-b61a-cfae8e6d2b81" alt="Производство 4" class="production__image">
+                            <div class="production__controls">
+                                <button class="production__arrow production__arrow--left" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="production__arrow production__arrow--right" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="production__dots">
+                            <span class="production__dot production__dot--active"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                        </div>
+                        <p class="production__item-text">Производительность автоматической линии сортировки бревна: до 500 м³ в смену. Эта линия позволяет эффективно обрабатывать большие объемы сырья.</p>
+                    </div>
+                    <div class="production__item">
+                        <div class="production__image-wrapper">
+                            <img src="https://www.figma.com/api/mcp/asset/f1199e88-8a5e-451a-8b03-fe466e14fddc" alt="Производство 5" class="production__image">
+                            <div class="production__controls">
+                                <button class="production__arrow production__arrow--left" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="production__arrow production__arrow--right" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="production__dots">
+                            <span class="production__dot production__dot--active"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                        </div>
+                        <p class="production__item-text">Мы испытали разные станки для оцилиндровки и выбрали токарно-роторный станок, который обеспечивает лучшее соотношение производительности и качества.</p>
+                    </div>
+                    <div class="production__item">
+                        <div class="production__image-wrapper">
+                            <img src="https://www.figma.com/api/mcp/asset/3fe775a2-6f1d-4c84-ae63-4b763fcb471c" alt="Производство 6" class="production__image">
+                            <div class="production__controls">
+                                <button class="production__arrow production__arrow--left" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="production__arrow production__arrow--right" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="production__dots">
+                            <span class="production__dot production__dot--active"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                            <span class="production__dot"></span>
+                        </div>
+                        <p class="production__item-text">Линия Вальтер. Это европейский станок для изготовления пиломатериалов, который обеспечивает высокоточную обработку и идеально ровную поверхность продукции.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta__bg">
+            <div class="container">
+                <div class="cta__content">
+                    <div class="cta__text">
+                        <h2 class="cta__title">Узнайте, сколько будет стоить ваш дом</h2>
+                        <div class="cta__benefits">
+                            <div class="cta__benefit">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <path d="M11.6667 3.5L5.25 9.91667L2.33334 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>3 варианта домов, подходящих под ваш бюджет, участок и формат жизни.</span>
+                            </div>
+                            <div class="cta__benefit">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <path d="M11.6667 3.5L5.25 9.91667L2.33334 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Предварительный план и 3D-пример, чтобы вы сразу представили, как будет выглядеть ваш дом.</span>
+                            </div>
+                            <div class="cta__benefit">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <path d="M11.6667 3.5L5.25 9.91667L2.33334 7" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Какие технологии лучше выбрать и как сократить расходы без потери качества.</span>
+                            </div>
+                        </div>
+                        <button class="btn btn--white cta__btn">Рассчитать стоимость</button>
+                    </div>
+                </div>
+            </div>
+            <img src="../../backend/uploads/Group 145 (1).png" alt="Pattern" class="cta__pattern">
+        </div>
+        <img src="../../backend/uploads/awfAWGawg 1.png" alt="Специалист" class="cta__person">
+    </section>
+
+    <!-- Completed Projects -->
+    <section class="completed" id="completed">
+        <div class="container">
+            <div class="completed__header">
+                <div>
+                    <h2 class="section-title">За 2024 год мы построили 302 дома.<br/>Всего же за 26 лет работы мы построили более 5000 домов.</h2>
+                    <p class="completed__description">Посмотрите на отзывы клиентов, которым мы уже построили дома. Мы внимательно относимся к обратной связи каждого клиента, чтобы с каждым разом становиться всё лучше и лучше.</p>
+                </div>
+                <div class="completed__nav">
+                    <button class="completed__nav-btn completed__nav-btn--prev" type="button">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="completed__nav-btn completed__nav-btn--next" type="button">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="completed__grid-wrapper">
+                <div class="completed__grid">
+                    <div class="completed-card">
+                        <div class="completed-card__image-wrapper">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Дом по индивидуальному проекту" class="completed-card__image">
+                            <div class="completed-card__controls">
+                                <button class="completed-card__arrow completed-card__arrow--left" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="completed-card__arrow completed-card__arrow--right" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="completed-card__dots">
+                                <span class="completed-card__dot completed-card__dot--active"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                            </div>
+                        </div>
+                        <div class="completed-card__content">
+                            <h3 class="completed-card__title">Дом по индивидуальному проекту</h3>
+                            <p class="completed-card__review">«Заказывали проект «Голицыно» теплый контур из клеенного бруса. Все сроки по договору были идеально соблюдены и даже в одном месте...»</p>
+                            <div class="completed-card__author">Юлия Б.</div>
+                            <a href="#" class="completed-card__link">Подробнее ></a>
+                        </div>
+                    </div>
+                    <div class="completed-card">
+                        <div class="completed-card__image-wrapper">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Дом по проекту «Верея»" class="completed-card__image">
+                            <div class="completed-card__controls">
+                                <button class="completed-card__arrow completed-card__arrow--left" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="completed-card__arrow completed-card__arrow--right" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="completed-card__dots">
+                                <span class="completed-card__dot completed-card__dot--active"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                            </div>
+                        </div>
+                        <div class="completed-card__content">
+                            <h3 class="completed-card__title">Дом по проекту «Верея»</h3>
+                            <p class="completed-card__review">«Большая благодарность за наш чудесный дом! Очень рады, что выбрали именно эту компанию. Положительные эмоции начиная с первого...»</p>
+                            <div class="completed-card__author">Анна А.</div>
+                            <a href="#" class="completed-card__link">Подробнее ></a>
+                        </div>
+                    </div>
+                    <div class="completed-card">
+                        <div class="completed-card__image-wrapper">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Дом по проекту «Райт»" class="completed-card__image">
+                            <div class="completed-card__controls">
+                                <button class="completed-card__arrow completed-card__arrow--left" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="completed-card__arrow completed-card__arrow--right" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="completed-card__dots">
+                                <span class="completed-card__dot completed-card__dot--active"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                            </div>
+                        </div>
+                        <div class="completed-card__content">
+                            <h3 class="completed-card__title">Дом по проекту «Райт»</h3>
+                            <p class="completed-card__review">«Мы с мужем из тех людей которые очень долго и тщательно анализируют рынок при покупке любой дорогой вещи)) Естественно выбирая проект и...»</p>
+                            <div class="completed-card__author">Елена Б.</div>
+                            <a href="#" class="completed-card__link">Подробнее ></a>
+                        </div>
+                    </div>
+                    <div class="completed-card">
+                        <div class="completed-card__image-wrapper">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Баня с купелью" class="completed-card__image">
+                            <div class="completed-card__controls">
+                                <button class="completed-card__arrow completed-card__arrow--left" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="completed-card__arrow completed-card__arrow--right" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="completed-card__dots">
+                                <span class="completed-card__dot completed-card__dot--active"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                            </div>
+                        </div>
+                        <div class="completed-card__content">
+                            <h3 class="completed-card__title">Баня с купелью по проекту «Малютка»</h3>
+                            <p class="completed-card__review">«Наш отзыв однозначно положительный! Стройка была чистой и очень быстрой. Мы получили огромное удовольствие от строительства нашего дома: не...»</p>
+                            <div class="completed-card__author">Татьяна П.</div>
+                            <a href="#" class="completed-card__link">Подробнее ></a>
+                        </div>
+                    </div>
+                    <div class="completed-card">
+                        <div class="completed-card__image-wrapper">
+                            <img src="../../backend/uploads/istra-00001 1.jpg" alt="Дом по проекту «Верея»" class="completed-card__image">
+                            <div class="completed-card__controls">
+                                <button class="completed-card__arrow completed-card__arrow--left" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M11.25 13.5L6.75 9L11.25 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="completed-card__arrow completed-card__arrow--right" type="button">
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M6.75 13.5L11.25 9L6.75 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="completed-card__dots">
+                                <span class="completed-card__dot completed-card__dot--active"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                                <span class="completed-card__dot"></span>
+                            </div>
+                        </div>
+                        <div class="completed-card__content">
+                            <h3 class="completed-card__title">Дом по проекту «Верея»</h3>
+                            <p class="completed-card__review">«Заказывали проект «Голицыно» теплый контур из клеенного бруса. Все сроки по договору были идеально соблюдены и даже в одном месте подстроились под...»</p>
+                            <div class="completed-card__author">Ирина С.</div>
+                            <a href="#" class="completed-card__link">Подробнее ></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn--primary completed__btn">Смотреть все построенные дома</button>
+        </div>
+    </section>
+
+    <!-- Tour -->
+    <section class="tour">
+        <div class="container">
+            <h2 class="section-title">Экскурсия</h2>
+            <p class="tour__description">Запланируйте встречу с персональным менеджером на центрально выставочной площадке. На экскурсии вы сможете вживую увидеть построенные дома, задать все интересующие вопросы, подобрать проекты под себя, узнать варианты по стоимости.</p>
+            <div class="tour__grid">
+                <div class="tour-card">
+                    <img src="../../backend/uploads/istra-00001 1.jpg" alt="Выставочная площадка в Москве" class="tour-card__image">
+                    <div class="tour-card__content">
+                        <h3 class="tour-card__title">Выставочная площадка деревянных домов Экотехстрой в Москве, МКАД 51 км</h3>
+                        <div class="tour-card__info">
+                            <span class="tour-card__badge">2 дома</span>
+                        </div>
+                        <a href="#" class="tour-card__link">Подробнее</a>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <img src="../../backend/uploads/istra-00001 1.jpg" alt="Выставочная площадка в Наро-Фоминске" class="tour-card__image">
+                    <div class="tour-card__content">
+                        <h3 class="tour-card__title">Выставочная площадка деревянных домов Экотехстрой в Наро-Фоминске</h3>
+                        <div class="tour-card__info">
+                            <span class="tour-card__badge">3 дома</span>
+                        </div>
+                        <a href="#" class="tour-card__link">Подробнее</a>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <img src="../../backend/uploads/istra-00001 1.jpg" alt="Производственный комплекс" class="tour-card__image">
+                    <div class="tour-card__content">
+                        <h3 class="tour-card__title">Производственный комплекс Экотехстрой Архангельская область</h3>
+                        <div class="tour-card__info">
+                            <span class="tour-card__badge">20 Га земли</span>
+                        </div>
+                        <a href="#" class="tour-card__link">Подробнее</a>
+                    </div>
+                </div>
+                <div class="tour-card">
+                    <img src="../../backend/uploads/istra-00001 1.jpg" alt="Склад пиломатериалов" class="tour-card__image">
+                    <div class="tour-card__content">
+                        <h3 class="tour-card__title">Большой склад пиломатериалов в Наро-Фоминске</h3>
+                        <div class="tour-card__info">
+                            <span class="tour-card__badge">Площадь склада: 6000 м²</span>
+                        </div>
+                        <a href="#" class="tour-card__link">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn--primary">Записаться на экскурсию</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__col">
+                    <img src="../../backend/uploads/logo_fin1.png" alt="ЭКО-ТЕХ" class="footer__logo">
+                    <div class="footer__contact">
+                        <a href="tel:+74999111486" class="footer__phone">8 (499) 911-14-86</a>
+                        <a href="mailto:info@ecotechstroy.ru" class="footer__email">info@ecotechstroy.ru</a>
+                    </div>
+                </div>
+                <div class="footer__col">
+                    <h3 class="footer__title">Проекты</h3>
+                    <ul class="footer__list">
+                        <li><a href="#">Все проекты</a></li>
+                        <li><a href="#">Дома из клеёного бруса</a></li>
+                        <li><a href="#">Каркасные дома</a></li>
+                        <li><a href="#">Дома из оцилиндрованного бревна</a></li>
+                        <li><a href="#">Дома ручной рубки</a></li>
+                        <li><a href="#">Бани</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h3 class="footer__title">Для клиентов</h3>
+                    <ul class="footer__list">
+                        <li><a href="#">Услуги</a></li>
+                        <li><a href="#">Кредитные программы</a></li>
+                        <li><a href="#">Отзывы</a></li>
+                        <li><a href="#">Акции и спецпредложения</a></li>
+                        <li><a href="#">Частозадаваемые вопросы</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h3 class="footer__title">Построенные дома</h3>
+                    <ul class="footer__list">
+                        <li><a href="#">Видео построенных домов</a></li>
+                        <li><a href="#">Фото построенных домов</a></li>
+                        <li><a href="#">Выставочные площадки</a></li>
+                        <li><a href="#">Новости</a></li>
+                        <li><a href="#">Видеолента</a></li>
+                        <li><a href="#">Статьи</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h3 class="footer__title">Главная выставочная площадка</h3>
+                    <p class="footer__address">р.п. Заречье, ул. Торговая стр. 2<br/>(Москва, МКАД 51 километр, около ТЦ «ЭлитСтройМатериалы»).</p>
+                    <h3 class="footer__title">Время работы</h3>
+                    <p class="footer__hours">Будни: с 10:00 до 19:00<br/>Выходные: с 11:00 до 18:00</p>
+                </div>
+                <div class="footer__col">
+                    <h3 class="footer__title">О компании</h3>
+                    <ul class="footer__list">
+                        <li><a href="#">История компании «ЭКО-ТЕХ»</a></li>
+                        <li><a href="#">Почему мы</a></li>
+                        <li><a href="#">Как мы работаем</a></li>
+                        <li><a href="#">Заготовка леса</a></li>
+                        <li><a href="#">Собственное производство</a></li>
+                        <li><a href="#">Партнёры</a></li>
+                        <li><a href="#">Цены на материалы</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                    </ul>
+                </div>
+                <div class="footer__col">
+                    <h3 class="footer__title">Медиахаб</h3>
+                    <ul class="footer__list">
+                        <li><a href="#">Весь медиахаб</a></li>
+                    </ul>
+                    <h3 class="footer__title">В чём отличие домов, построенных компанией «ЭКО-ТЕХ», от других строительных компаний?</h3>
+                    <button class="btn btn--white btn--small">Подробнее</button>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 1999 — 2025, ЭКО-ТЕХ</p>
+                <p class="footer__legal">Все права на публикуемые на сайте ecotechstroy.ru материалы принадлежат ООО «Экотехстрой».<br/><br/>Пользователь уведомлен, что любые материалы, размещенные на сайте, являются объектами интеллектуальной собственности ООО «Экотехстрой» (правообладателя). Пользователь не вправе без предварительного письменного разрешения правообладателя осуществлять какие-либо действия с объектами интеллектуальной собственности, в противном случае, правообладатель оставляет за собой право на взыскание штрафов, предусмотренных законодательством РФ, а также на обращение в компетентные органы за защитой своих прав и законных интересов.<br/>Любая информация, представленная на данном сайте, носит исключительно информационный характер и ни при каких условиях не является публичной офертой, определяемой положениями статьи 437 ГК РФ.</p>
+                <p class="footer__studio">Сайт сделан в студии ANSARA</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../components/main.js"></script>
+</body>
+</html>
+
+
