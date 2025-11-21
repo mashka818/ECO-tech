@@ -15,8 +15,38 @@ const PORT = parseInt(process.env.PORT || '3000', 10);
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://ecotechstroy-dev.ru',
-  credentials: true
+  origin: function (origin, callback) {
+    // Разрешаем запросы без origin (например, Postman, curl)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      'http://ecotechstroy-dev.ru',
+      'https://ecotechstroy-dev.ru',
+      'http://www.ecotechstroy-dev.ru',
+      'https://www.ecotechstroy-dev.ru',
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'http://localhost:8080',
+      'http://81.177.216.84',
+      'http://81.177.216.84:80',
+      'https://81.177.216.84',
+      'https://81.177.216.84:443'
+    ];
+    
+    // Добавляем кастомный origin из переменной окружения
+    if (process.env.FRONTEND_URL) {
+      allowedOrigins.push(process.env.FRONTEND_URL);
+    }
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Разрешаем все для упрощения, можно заменить на callback(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-session-id']
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
