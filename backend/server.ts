@@ -134,24 +134,31 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
 
 // Swagger JSON endpoint с динамическим определением сервера
 app.get('/docs/swagger.json', (req: Request, res: Response) => {
-  const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
-  const host = req.headers.host || 'ecotechstroy-dev.ru';
-  const baseUrl = `${protocol}://${host}`;
+  // Определяем протокол из заголовков Nginx
+  let protocol = 'https';
+  if (req.headers['x-forwarded-proto']) {
+    protocol = Array.isArray(req.headers['x-forwarded-proto']) 
+      ? req.headers['x-forwarded-proto'][0] 
+      : req.headers['x-forwarded-proto'];
+  } else if (req.secure) {
+    protocol = 'https';
+  }
+  
+  // Определяем хост
+  const host = req.headers['x-forwarded-host'] 
+    || (Array.isArray(req.headers.host) ? req.headers.host[0] : req.headers.host)
+    || 'ecotechstroy-dev.ru';
+  
+  // Убираем www если есть
+  const cleanHost = host.replace(/^www\./, '');
+  const baseUrl = `${protocol}://${cleanHost}`;
   
   const swaggerSpecWithServer = {
     ...swaggerSpec,
     servers: [
       {
-        url: baseUrl,
-        description: 'Current server',
-      },
-      {
         url: 'https://ecotechstroy-dev.ru',
         description: 'Production server (HTTPS)',
-      },
-      {
-        url: 'http://localhost:3000',
-        description: 'Local development server',
       },
     ],
   };
