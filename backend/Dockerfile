@@ -1,8 +1,11 @@
-# Используем официальный образ Node.js
-FROM node:18-alpine
+# Используем официальный образ Node.js (Debian для лучшей совместимости с Prisma)
+FROM node:18-slim
 
-# Устанавливаем OpenSSL и другие необходимые библиотеки для Prisma
-RUN apk add --no-cache openssl1.1-compat libc6-compat
+# Устанавливаем необходимые библиотеки для Prisma
+RUN apt-get update && apt-get install -y \
+    openssl \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
