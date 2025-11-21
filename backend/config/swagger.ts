@@ -14,11 +14,7 @@ const swaggerDefinition: SwaggerDefinition = {
       servers: [
         {
           url: 'https://ecotechstroy-dev.ru',
-          description: 'Production server (HTTPS)',
-        },
-        {
-          url: 'http://localhost:3000',
-          description: 'Local development server',
+          description: 'Production server (HTTPS only)',
         },
       ],
   tags: [

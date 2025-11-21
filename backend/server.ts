@@ -121,7 +121,7 @@ app.get('/', (req: Request, res: Response) => {
   });
 });
 
-// Swagger UI с динамическим определением сервера
+// Swagger UI
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
   customCss: '.swagger-ui .topbar { display: none }',
   customSiteTitle: 'ECO-tech API Documentation',
@@ -129,40 +129,28 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
     url: '/docs/swagger.json',
     persistAuthorization: true,
     displayRequestDuration: true,
+    validatorUrl: null,
   }
 }));
 
-// Swagger JSON endpoint с динамическим определением сервера
+// Swagger JSON endpoint - всегда возвращает только HTTPS домен
 app.get('/docs/swagger.json', (req: Request, res: Response) => {
-  // Определяем протокол из заголовков Nginx
-  let protocol = 'https';
-  if (req.headers['x-forwarded-proto']) {
-    protocol = Array.isArray(req.headers['x-forwarded-proto']) 
-      ? req.headers['x-forwarded-proto'][0] 
-      : req.headers['x-forwarded-proto'];
-  } else if (req.secure) {
-    protocol = 'https';
-  }
-  
-  // Определяем хост
-  const host = req.headers['x-forwarded-host'] 
-    || (Array.isArray(req.headers.host) ? req.headers.host[0] : req.headers.host)
-    || 'ecotechstroy-dev.ru';
-  
-  // Убираем www если есть
-  const cleanHost = host.replace(/^www\./, '');
-  const baseUrl = `${protocol}://${cleanHost}`;
-  
+  // Всегда используем только HTTPS домен, игнорируя любые другие значения
   const swaggerSpecWithServer = {
     ...swaggerSpec,
     servers: [
       {
         url: 'https://ecotechstroy-dev.ru',
-        description: 'Production server (HTTPS)',
+        description: 'Production server (HTTPS only)',
       },
     ],
   };
   
+  // Запрещаем кэширование, чтобы всегда получать актуальную версию
+  res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
   res.json(swaggerSpecWithServer);
 });
 
