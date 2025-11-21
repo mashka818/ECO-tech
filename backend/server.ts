@@ -16,32 +16,30 @@ const PORT = parseInt(process.env.PORT || '3000', 10);
 // Middleware
 app.use(cors({
   origin: function (origin, callback) {
-    // Разрешаем запросы без origin (например, Postman, curl)
-    if (!origin) return callback(null, true);
-    
+    // Разрешаем только запросы с ecotechstroy-dev.ru (без www и IP)
     const allowedOrigins = [
-      'http://ecotechstroy-dev.ru',
-      'https://ecotechstroy-dev.ru',
-      'http://www.ecotechstroy-dev.ru',
-      'https://www.ecotechstroy-dev.ru',
-      'http://localhost:3000',
-      'http://localhost:5173',
-      'http://localhost:8080',
-      'http://81.177.216.84',
-      'http://81.177.216.84:80',
-      'https://81.177.216.84',
-      'https://81.177.216.84:443'
+      'https://ecotechstroy-dev.ru'  // Только HTTPS версия домена
     ];
     
-    // Добавляем кастомный origin из переменной окружения
-    if (process.env.FRONTEND_URL) {
-      allowedOrigins.push(process.env.FRONTEND_URL);
-    }
-    
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
+    // В production разрешаем только указанные origin
+    if (process.env.NODE_ENV === 'production') {
+      if (!origin) {
+        // Запросы без origin (например, Postman) блокируем в production
+        return callback(new Error('CORS: Origin is required in production'));
+      }
+      
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS: Origin ${origin} is not allowed. Only https://ecotechstroy-dev.ru is allowed.`));
+      }
     } else {
-      callback(null, true); // Разрешаем все для упрощения, можно заменить на callback(new Error('Not allowed by CORS'))
+      // В development разрешаем localhost
+      if (!origin || allowedOrigins.indexOf(origin) !== -1 || origin.includes('localhost')) {
+        callback(null, true);
+      } else {
+        callback(new Error('CORS: Not allowed'));
+      }
     }
   },
   credentials: true,
