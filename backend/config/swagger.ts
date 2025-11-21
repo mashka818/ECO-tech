@@ -36,7 +36,7 @@ const swaggerDefinition: SwaggerDefinition = {
     },
     {
       name: 'Staff',
-      description: 'Управление фотографиями персонала',
+      description: 'Управление персоналом',
     },
   ],
   components: {
@@ -64,23 +64,18 @@ const swaggerDefinition: SwaggerDefinition = {
           terraces: { type: 'integer', example: 1 },
           price: { type: 'number', example: 5111715 },
           description: { type: 'string' },
-          mainImage: { type: 'string', nullable: true },
+          mainImage: { type: 'string', nullable: true, description: 'Главное изображение проекта' },
+          images: { 
+            type: 'array', 
+            items: { type: 'string' },
+            description: 'Массив путей к изображениям проекта',
+            example: ['/uploads/projects/image1.jpg', '/uploads/projects/image2.jpg']
+          },
           createdAt: { type: 'string', format: 'date-time' },
           updatedAt: { type: 'string', format: 'date-time' },
         },
       },
-      ProjectImage: {
-        type: 'object',
-        properties: {
-          id: { type: 'integer' },
-          projectId: { type: 'integer' },
-          imagePath: { type: 'string' },
-          isMain: { type: 'boolean' },
-          displayOrder: { type: 'integer' },
-          createdAt: { type: 'string', format: 'date-time' },
-        },
-      },
-      StaffPhoto: {
+      Staff: {
         type: 'object',
         properties: {
           id: { type: 'integer' },

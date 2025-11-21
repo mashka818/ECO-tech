@@ -56,24 +56,12 @@ const upload = multer({
 router.get('/', async (req: Request, res: Response) => {
   try {
     const projects = await prisma.project.findMany({
-      include: {
-        images: {
-          where: { isMain: true },
-          take: 1,
-        },
-      },
       orderBy: {
         createdAt: 'desc',
       },
     });
-
-    const projectsWithMainImage = projects.map(project => ({
-      ...project,
-      main_image: project.images[0]?.imagePath || null,
-      images: undefined, // Убираем images из ответа, оставляем только main_image
-    }));
     
-    res.json(projectsWithMainImage);
+    res.json(projects);
   } catch (error) {
     const err = error as Error;
     res.status(500).json({ error: err.message });
@@ -110,14 +98,6 @@ router.get('/:slug', async (req: Request, res: Response) => {
     
     const project = await prisma.project.findUnique({
       where: { slug },
-      include: {
-        images: {
-          orderBy: [
-            { displayOrder: 'asc' },
-            { id: 'asc' },
-          ],
-        },
-      },
     });
     
     if (!project) {
@@ -206,6 +186,15 @@ router.post('/', upload.array('images', 10), async (req: Request, res: Response)
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '');
     
+    // Обрабатываем загруженные изображения
+    const imagePaths: string[] = [];
+    let mainImagePath: string | null = null;
+    
+    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+      imagePaths.push(...req.files.map(file => `/uploads/projects/${file.filename}`));
+      mainImagePath = imagePaths[0] || null;
+    }
+    
     // Создаем проект с изображениями
     const project = await prisma.project.create({
       data: {
@@ -220,18 +209,8 @@ router.post('/', upload.array('images', 10), async (req: Request, res: Response)
         terraces: terraces ? parseInt(terraces) : null,
         price: price ? parseFloat(price) : null,
         description: description || null,
-        images: {
-          create: req.files && Array.isArray(req.files) && req.files.length > 0
-            ? req.files.map((file, i) => ({
-                imagePath: `/uploads/projects/${file.filename}`,
-                isMain: i === 0,
-                displayOrder: i,
-              }))
-            : [],
-        },
-      },
-      include: {
-        images: true,
+        mainImage: mainImagePath,
+        images: imagePaths,
       },
     });
     
@@ -321,40 +300,40 @@ router.put('/:id', upload.array('images', 10), async (req: Request, res: Respons
       return;
     }
     
-    // Получаем максимальный display_order для новых изображений
-    const maxOrder = await prisma.projectImage.aggregate({
-      where: { projectId },
-      _max: { displayOrder: true },
-    });
-    const nextOrder = (maxOrder._max.displayOrder ?? -1) + 1;
+    // Обрабатываем новые загруженные изображения
+    const newImagePaths: string[] = [];
+    if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+      newImagePaths.push(...req.files.map(file => `/uploads/projects/${file.filename}`));
+    }
+    
+    // Объединяем существующие изображения с новыми (если есть)
+    const existingImages: string[] = Array.isArray(existingProject.images) ? existingProject.images : [];
+    const allImages = [...existingImages, ...newImagePaths];
+    const mainImage = allImages.length > 0 ? allImages[0] : null;
     
     // Обновляем проект
+    const updateData: any = {
+      ...(title && { title }),
+      ...(subtitle !== undefined && { subtitle: subtitle || null }),
+      ...(area !== undefined && { area: area || null }),
+      ...(dimensions !== undefined && { dimensions: dimensions || null }),
+      ...(floors !== undefined && { floors: floors ? parseInt(floors) : 1 }),
+      ...(rooms !== undefined && { rooms: rooms ? parseInt(rooms) : null }),
+      ...(bathrooms !== undefined && { bathrooms: bathrooms ? parseInt(bathrooms) : null }),
+      ...(terraces !== undefined && { terraces: terraces ? parseInt(terraces) : null }),
+      ...(price !== undefined && { price: price ? parseFloat(price) : null }),
+      ...(description !== undefined && { description: description || null }),
+    };
+    
+    // Обновляем изображения только если загружены новые
+    if (newImagePaths.length > 0) {
+      updateData.images = allImages;
+      updateData.mainImage = mainImage;
+    }
+    
     const project = await prisma.project.update({
       where: { id: projectId },
-      data: {
-        title,
-        subtitle: subtitle || null,
-        area: area || null,
-        dimensions: dimensions || null,
-        floors: floors ? parseInt(floors) : undefined,
-        rooms: rooms ? parseInt(rooms) : null,
-        bathrooms: bathrooms ? parseInt(bathrooms) : null,
-        terraces: terraces ? parseInt(terraces) : null,
-        price: price ? parseFloat(price) : null,
-        description: description || null,
-        ...(req.files && Array.isArray(req.files) && req.files.length > 0 && {
-          images: {
-            create: req.files.map((file, i) => ({
-              imagePath: `/uploads/projects/${file.filename}`,
-              isMain: false,
-              displayOrder: nextOrder + i,
-            })),
-          },
-        }),
-      },
-      include: {
-        images: true,
-      },
+      data: updateData,
     });
     
     res.json(project);
@@ -390,21 +369,30 @@ router.delete('/:id', async (req: Request, res: Response) => {
     const { id } = req.params;
     const projectId = parseInt(id);
     
-    // Получаем пути к изображениям для удаления
-    const images = await prisma.projectImage.findMany({
-      where: { projectId },
-      select: { imagePath: true },
+    // Получаем проект с путями к изображениям
+    const project = await prisma.project.findUnique({
+      where: { id: projectId },
+      select: { images: true, mainImage: true },
     });
     
-    // Удаляем файлы
-    for (const img of images) {
-      const filePath = path.join(__dirname, '..', img.imagePath);
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
+    if (!project) {
+      res.status(404).json({ error: 'Project not found' });
+      return;
+    }
+    
+    // Удаляем файлы изображений
+    const projectImages: string[] = Array.isArray(project.images) ? project.images : [];
+    const allImages = [...projectImages, project.mainImage].filter((img): img is string => typeof img === 'string');
+    for (const imagePath of allImages) {
+      if (imagePath) {
+        const filePath = path.join(__dirname, '..', imagePath);
+        if (fs.existsSync(filePath)) {
+          fs.unlinkSync(filePath);
+        }
       }
     }
     
-    // Удаляем проект (изображения удалятся каскадно)
+    // Удаляем проект
     await prisma.project.delete({
       where: { id: projectId },
     });

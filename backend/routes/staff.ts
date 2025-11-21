@@ -53,22 +53,22 @@ const upload = multer({
  * @swagger
  * /api/staff:
  *   get:
- *     summary: Получить все фотографии персонала
+ *     summary: Получить всех сотрудников
  *     tags: [Staff]
  *     responses:
  *       200:
- *         description: Список фотографий персонала
+ *         description: Список сотрудников
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/StaffPhoto'
+ *                 $ref: '#/components/schemas/Staff'
  */
-// Получить все фотографии персонала
+// Получить всех сотрудников
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const staffPhotos = await prisma.staffPhoto.findMany({
+    const staffPhotos = await prisma.staff.findMany({
       orderBy: [
         { displayOrder: 'asc' },
         { id: 'asc' },
@@ -86,7 +86,7 @@ router.get('/', async (req: Request, res: Response) => {
  * @swagger
  * /api/staff/{id}:
  *   get:
- *     summary: Получить фотографию персонала по ID
+ *     summary: Получить сотрудника по ID
  *     tags: [Staff]
  *     parameters:
  *       - in: path
@@ -96,13 +96,13 @@ router.get('/', async (req: Request, res: Response) => {
  *           type: integer
  *     responses:
  *       200:
- *         description: Фотография персонала
+ *         description: Данные сотрудника
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/StaffPhoto'
  *       404:
- *         description: Фотография не найдена
+ *         description: Сотрудник не найден
  */
 // Получить одну фотографию персонала по ID
 router.get('/:id', async (req: Request, res: Response) => {
@@ -110,7 +110,7 @@ router.get('/:id', async (req: Request, res: Response) => {
     const { id } = req.params;
     const staffPhotoId = parseInt(id);
     
-    const staffPhoto = await prisma.staffPhoto.findUnique({
+    const staffPhoto = await prisma.staff.findUnique({
       where: { id: staffPhotoId },
     });
     
@@ -130,7 +130,7 @@ router.get('/:id', async (req: Request, res: Response) => {
  * @swagger
  * /api/staff:
  *   post:
- *     summary: Добавить фотографию персонала (только для админа)
+ *     summary: Добавить сотрудника (только для админа)
  *     tags: [Staff]
  *     security:
  *       - sessionAuth: []
@@ -147,6 +147,7 @@ router.get('/:id', async (req: Request, res: Response) => {
  *               photo:
  *                 type: string
  *                 format: binary
+ *                 description: Фотография сотрудника
  *               fullName:
  *                 type: string
  *                 example: Иван Иванов
@@ -157,7 +158,7 @@ router.get('/:id', async (req: Request, res: Response) => {
  *                 description: Должность сотрудника
  *     responses:
  *       201:
- *         description: Фотография добавлена
+ *         description: Сотрудник добавлен
  *         content:
  *           application/json:
  *             schema:
@@ -165,7 +166,7 @@ router.get('/:id', async (req: Request, res: Response) => {
  *       400:
  *         description: Ошибка валидации
  */
-// Добавить фотографию персонала
+// Добавить сотрудника
 router.post('/', upload.single('photo'), async (req: Request, res: Response) => {
   try {
     if (!req.file) {
@@ -183,12 +184,12 @@ router.post('/', upload.single('photo'), async (req: Request, res: Response) => 
     const imageFilename = req.file.filename;
     
     // Получаем максимальный display_order
-    const maxOrder = await prisma.staffPhoto.aggregate({
+    const maxOrder = await prisma.staff.aggregate({
       _max: { displayOrder: true },
     });
     const displayOrder = (maxOrder._max.displayOrder ?? -1) + 1;
     
-    const staffPhoto = await prisma.staffPhoto.create({
+    const staffPhoto = await prisma.staff.create({
       data: {
         fullName: fullName.trim(),
         position: position ? position.trim() : null,
@@ -208,7 +209,7 @@ router.post('/', upload.single('photo'), async (req: Request, res: Response) => 
  * @swagger
  * /api/staff/{id}:
  *   put:
- *     summary: Обновить фотографию персонала (только для админа)
+ *     summary: Обновить данные сотрудника (только для админа)
  *     tags: [Staff]
  *     security:
  *       - sessionAuth: []
@@ -227,6 +228,7 @@ router.post('/', upload.single('photo'), async (req: Request, res: Response) => 
  *               photo:
  *                 type: string
  *                 format: binary
+ *                 description: Фотография сотрудника
  *               fullName:
  *                 type: string
  *                 example: Иван Иванов
@@ -240,11 +242,11 @@ router.post('/', upload.single('photo'), async (req: Request, res: Response) => 
  *                 description: Порядок отображения
  *     responses:
  *       200:
- *         description: Фотография обновлена
+ *         description: Данные сотрудника обновлены
  *       404:
- *         description: Фотография не найдена
+ *         description: Сотрудник не найден
  */
-// Обновить фотографию персонала
+// Обновить данные сотрудника
 router.put('/:id', upload.single('photo'), async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -252,7 +254,7 @@ router.put('/:id', upload.single('photo'), async (req: Request, res: Response) =
     const { fullName, position, display_order } = req.body;
     
     // Проверяем существование записи
-    const existing = await prisma.staffPhoto.findUnique({
+    const existing = await prisma.staff.findUnique({
       where: { id: staffPhotoId },
     });
     
@@ -294,7 +296,7 @@ router.put('/:id', upload.single('photo'), async (req: Request, res: Response) =
     }
     
     // Обновляем запись
-    const staffPhoto = await prisma.staffPhoto.update({
+    const staffPhoto = await prisma.staff.update({
       where: { id: staffPhotoId },
       data: updateData,
     });
@@ -310,7 +312,7 @@ router.put('/:id', upload.single('photo'), async (req: Request, res: Response) =
  * @swagger
  * /api/staff/{id}:
  *   delete:
- *     summary: Удалить фотографию персонала (только для админа)
+ *     summary: Удалить сотрудника (только для админа)
  *     tags: [Staff]
  *     security:
  *       - sessionAuth: []
@@ -322,18 +324,18 @@ router.put('/:id', upload.single('photo'), async (req: Request, res: Response) =
  *           type: integer
  *     responses:
  *       200:
- *         description: Фотография удалена
+ *         description: Сотрудник удален
  *       404:
- *         description: Фотография не найдена
+ *         description: Сотрудник не найден
  */
-// Удалить фотографию персонала
+// Удалить сотрудника
 router.delete('/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const staffPhotoId = parseInt(id);
     
     // Получаем имя файла
-    const staffPhoto = await prisma.staffPhoto.findUnique({
+    const staffPhoto = await prisma.staff.findUnique({
       where: { id: staffPhotoId },
       select: { imageFilename: true },
     });
@@ -350,7 +352,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
     }
     
     // Удаляем запись из БД
-    await prisma.staffPhoto.delete({
+    await prisma.staff.delete({
       where: { id: staffPhotoId },
     });
     
