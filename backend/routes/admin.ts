@@ -63,11 +63,21 @@ router.post('/login', async (req: Request, res: Response) => {
       return;
     }
 
-    // Простая сессия (в продакшене использовать JWT)
+    // Создаем сессию и сохраняем в БД
     const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
-    // Сохранить сессию (можно в Redis или БД)
-    // Для простоты возвращаем sessionId
+    // Сессия действительна 24 часа
+    const expiresAt = new Date();
+    expiresAt.setHours(expiresAt.getHours() + 24);
+    
+    // Сохраняем сессию в БД
+    await prisma.session.create({
+      data: {
+        sessionId,
+        adminId: admin.id,
+        expiresAt,
+      },
+    });
     
     res.json({
       success: true,
@@ -111,7 +121,24 @@ router.get('/check', async (req: Request, res: Response) => {
       return;
     }
 
-    // В реальном приложении проверять сессию в БД
+    // Проверяем сессию в БД
+    const session = await prisma.session.findUnique({
+      where: { sessionId: String(sessionId) },
+    });
+
+    if (!session) {
+      res.status(401).json({ authenticated: false });
+      return;
+    }
+
+    // Проверяем, не истекла ли сессия
+    const now = new Date();
+    if (session.expiresAt < now) {
+      await prisma.session.delete({ where: { id: session.id } });
+      res.status(401).json({ authenticated: false });
+      return;
+    }
+
     res.json({ authenticated: true });
   } catch (error) {
     res.status(500).json({ error: 'Check failed' });

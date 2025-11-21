@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { prisma } from '../prisma/client';
+import { requireAuth } from '../middleware/auth';
 import multer from 'multer';
 import path from 'path';
 import * as fs from 'fs';
@@ -167,7 +168,7 @@ router.get('/:id', async (req: Request, res: Response) => {
  *         description: Ошибка валидации
  */
 // Добавить сотрудника
-router.post('/', upload.single('photo'), async (req: Request, res: Response) => {
+router.post('/', requireAuth, upload.single('photo'), async (req: Request, res: Response) => {
   try {
     if (!req.file) {
       res.status(400).json({ error: 'No file uploaded' });
@@ -247,7 +248,7 @@ router.post('/', upload.single('photo'), async (req: Request, res: Response) => 
  *         description: Сотрудник не найден
  */
 // Обновить данные сотрудника
-router.put('/:id', upload.single('photo'), async (req: Request, res: Response) => {
+router.put('/:id', requireAuth, upload.single('photo'), async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const staffPhotoId = parseInt(id);
@@ -329,7 +330,7 @@ router.put('/:id', upload.single('photo'), async (req: Request, res: Response) =
  *         description: Сотрудник не найден
  */
 // Удалить сотрудника
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id', requireAuth, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const staffPhotoId = parseInt(id);

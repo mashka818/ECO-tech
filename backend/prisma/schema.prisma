@@ -44,10 +44,22 @@ model Staff {
 }
 
 model Admin {
-  id           Int      @id @default(autoincrement())
-  username     String   @unique @db.VarChar(100)
-  passwordHash String   @map("password_hash") @db.VarChar(255)
-  createdAt    DateTime @default(now()) @map("created_at")
+  id           Int       @id @default(autoincrement())
+  username     String    @unique @db.VarChar(100)
+  passwordHash String    @map("password_hash") @db.VarChar(255)
+  createdAt    DateTime  @default(now()) @map("created_at")
+  sessions     Session[]
 
   @@map("admins")
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  sessionId String   @unique @db.VarChar(255)
+  adminId   Int      @map("admin_id")
+  admin     Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+  expiresAt DateTime @map("expires_at")
+
+  @@map("sessions")
 }

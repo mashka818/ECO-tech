@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { prisma } from '../prisma/client';
+import { requireAuth } from '../middleware/auth';
 import multer from 'multer';
 import path from 'path';
 import * as fs from 'fs';
@@ -165,7 +166,7 @@ router.get('/:slug', async (req: Request, res: Response) => {
  *         description: Ошибка валидации
  */
 // Создать проект (только для админа)
-router.post('/', upload.array('images', 10), async (req: Request, res: Response) => {
+router.post('/', requireAuth, upload.array('images', 10), async (req: Request, res: Response) => {
   try {
     const {
       title,
@@ -273,7 +274,7 @@ router.post('/', upload.array('images', 10), async (req: Request, res: Response)
  *         description: Проект не найден
  */
 // Обновить проект
-router.put('/:id', upload.array('images', 10), async (req: Request, res: Response) => {
+router.put('/:id', requireAuth, upload.array('images', 10), async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const projectId = parseInt(id);
@@ -364,7 +365,7 @@ router.put('/:id', upload.array('images', 10), async (req: Request, res: Respons
  *         description: Проект не найден
  */
 // Удалить проект
-router.delete('/:id', async (req: Request, res: Response) => {
+router.delete('/:id', requireAuth, async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const projectId = parseInt(id);
