@@ -77,13 +77,40 @@ sudo chmod 755 nginx/ssl
 if [ ! -f nginx/ssl/fullchain.pem ]; then
     echo "🔒 Установка SSL сертификата через Certbot..."
     sudo apt install -y certbot
-    sudo certbot certonly --standalone -d ecotechstroy-dev.ru -d www.ecotechstroy-dev.ru
     
-    # Копирование сертификатов
-    sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/fullchain.pem nginx/ssl/
-    sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/privkey.pem nginx/ssl/
-    sudo chmod 644 nginx/ssl/fullchain.pem
-    sudo chmod 600 nginx/ssl/privkey.pem
+    # Остановка веб-серверов, которые могут занимать порт 80
+    echo "Остановка веб-серверов для освобождения порта 80..."
+    sudo systemctl stop nginx 2>/dev/null || true
+    sudo systemctl stop apache2 2>/dev/null || true
+    
+    # Проверка, свободен ли порт 80
+    if sudo netstat -tlnp | grep -q ":80 "; then
+        echo "⚠️  Порт 80 все еще занят. Проверьте, что занимает порт:"
+        sudo netstat -tlnp | grep :80
+        echo "Остановите процесс вручную и повторите попытку."
+    else
+        # Запрос email или использование флага без email
+        read -p "Введите email для уведомлений (или нажмите Enter для пропуска): " EMAIL
+        
+        if [ -z "$EMAIL" ]; then
+            echo "Получение сертификата без email..."
+            sudo certbot certonly --standalone -d ecotechstroy-dev.ru -d www.ecotechstroy-dev.ru --register-unsafely-without-email --agree-tos --non-interactive
+        else
+            echo "Получение сертификата с email: $EMAIL"
+            sudo certbot certonly --standalone -d ecotechstroy-dev.ru -d www.ecotechstroy-dev.ru --email "$EMAIL" --agree-tos --non-interactive
+        fi
+        
+        # Копирование сертификатов
+        if [ -f /etc/letsencrypt/live/ecotechstroy-dev.ru/fullchain.pem ]; then
+            sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/fullchain.pem nginx/ssl/
+            sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/privkey.pem nginx/ssl/
+            sudo chmod 644 nginx/ssl/fullchain.pem
+            sudo chmod 600 nginx/ssl/privkey.pem
+            echo "✅ SSL сертификаты успешно скопированы"
+        else
+            echo "⚠️  Не удалось получить сертификаты. Проверьте настройки DNS и доступность домена."
+        fi
+    fi
 fi
 
 # 10. Настройка файрвола

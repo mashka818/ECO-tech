@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   backend:
     build:
@@ -19,7 +17,9 @@ services:
       - PORT=3000
     volumes:
       - ./backend/uploads:/app/uploads
-      - ./backend:/app
+      # Не монтируем весь backend, чтобы не перезаписать собранный dist
+      # Для разработки можно раскомментировать:
+      # - ./backend:/app
     restart: unless-stopped
     networks:
       - eco-tech-network

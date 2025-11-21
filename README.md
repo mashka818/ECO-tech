@@ -16,6 +16,8 @@ chmod +x setup.sh
 sudo ./setup.sh
 ```
 
+**Или смотрите подробную инструкцию:** [backend/SETUP.md](backend/SETUP.md)
+
 ### 3. Ручная настройка
 
 #### Настройка переменных окружения
@@ -47,10 +49,38 @@ npm run create-admin
 cd ..
 ```
 
+#### Настройка DNS записей (ОБЯЗАТЕЛЬНО перед SSL!)
+
+В панели управления доменом создайте DNS записи:
+- **A запись:** `ecotechstroy-dev.ru` → `81.177.216.84`
+- **A запись:** `www.ecotechstroy-dev.ru` → `81.177.216.84`
+
+Проверка DNS:
+```bash
+dig ecotechstroy-dev.ru +short  # Должно вернуть: 81.177.216.84
+dig www.ecotechstroy-dev.ru +short  # Должно вернуть: 81.177.216.84
+```
+
+**Важно:** Подождите 15-30 минут после создания записей для их распространения.
+
 #### Настройка SSL (для HTTPS)
 ```bash
 sudo apt install -y certbot
-sudo certbot certonly --standalone -d ecotechstroy-dev.ru -d www.ecotechstroy-dev.ru
+
+# ВАЖНО: Убедитесь, что DNS записи настроены и домен указывает на сервер!
+# Проверка DNS
+dig ecotechstroy-dev.ru +short
+dig www.ecotechstroy-dev.ru +short
+
+# ВАЖНО: Остановите веб-сервер перед получением сертификата
+sudo systemctl stop nginx
+sudo systemctl stop apache2
+
+# Получение SSL сертификата с email (рекомендуется)
+sudo certbot certonly --standalone -d ecotechstroy-dev.ru -d www.ecotechstroy-dev.ru --email your-email@example.com --agree-tos --non-interactive
+
+# Или без email (если не хотите указывать)
+sudo certbot certonly --standalone -d ecotechstroy-dev.ru -d www.ecotechstroy-dev.ru --register-unsafely-without-email --agree-tos --non-interactive
 
 # Копирование сертификатов
 sudo mkdir -p nginx/ssl
@@ -59,6 +89,12 @@ sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/privkey.pem nginx/ssl/
 sudo chmod 644 nginx/ssl/fullchain.pem
 sudo chmod 600 nginx/ssl/privkey.pem
 ```
+
+**Примечания:** 
+- **Сначала настройте DNS записи!** Без них Certbot не сможет получить сертификат
+- Замените `your-email@example.com` на ваш реальный email адрес
+- **Обязательно остановите nginx/apache перед получением сертификата**, иначе будет ошибка "port 80 already in use"
+- После получения сертификата веб-сервер будет запущен через Docker Compose
 
 ### 4. Запуск проекта
 
@@ -109,6 +145,7 @@ eco-tech/
 
 ### Админ (требует авторизации)
 - `POST /api/admin/login` - Вход (admin/admin)
+- `GET /api/admin/check` - Проверка авторизации
 - `POST /api/projects` - Создать проект
 - `PUT /api/projects/:id` - Обновить проект
 - `DELETE /api/projects/:id` - Удалить проект
@@ -116,28 +153,45 @@ eco-tech/
 - `PUT /api/staff/:id` - Обновить фото персонала
 - `DELETE /api/staff/:id` - Удалить фото персонала
 
+### Документация API
+- `GET /docs` - Swagger UI документация
+  - HTTP: `http://81.177.216.84/docs`
+  - HTTPS: `https://ecotechstroy-dev.ru/docs`
+
 ## Полезные команды
 
 ```bash
 # Управление контейнерами
-docker-compose up -d              # Запуск
-docker-compose down               # Остановка
-docker-compose restart            # Перезапуск
-docker-compose logs -f             # Логи всех сервисов
-docker-compose logs -f backend     # Логи только backend
+docker-compose up -d              # Запуск всех сервисов
+docker-compose down               # Остановка всех сервисов
+docker-compose restart            # Перезапуск всех сервисов
+docker-compose logs -f            # Логи всех сервисов
+docker-compose logs -f backend    # Логи только backend
+docker-compose ps                 # Статус контейнеров
 
 # Backend
 cd backend
-npm run dev                        # Разработка
-npm run build                      # Сборка
-npm run prisma:studio              # Prisma Studio
-npm run create-admin               # Создать админа
+npm install                       # Установка зависимостей
+npm run dev                       # Разработка (с автоперезагрузкой)
+npm run build                     # Сборка TypeScript
+npm start                         # Запуск собранного проекта
+npm run prisma:generate           # Генерация Prisma Client
+npm run prisma:studio             # Prisma Studio (GUI для БД)
+npm run prisma:migrate            # Создание миграции
+npx prisma db push                # Применение изменений схемы
+npm run create-admin              # Создать админа
 
 # Обновление проекта
 git pull origin v2
-cd backend && npm install && npm run build
+cd backend
+npm install
+npm run prisma:generate
+npm run build
+cd ..
 docker-compose restart
 ```
+
+**Подробная документация:** [backend/SETUP.md](backend/SETUP.md)
 
 ## Переменные окружения
 

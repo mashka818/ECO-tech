@@ -24,8 +24,11 @@ RUN mkdir -p uploads
 # Устанавливаем права на uploads
 RUN chmod -R 755 uploads
 
-# Компилируем TypeScript
+# Компилируем TypeScript (должно быть после копирования всех файлов)
 RUN npm run build
+
+# Проверка, что dist создан
+RUN ls -la dist/ || echo "WARNING: dist directory not found"
 
 # Открываем порт
 EXPOSE 3000

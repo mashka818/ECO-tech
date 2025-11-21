@@ -4,19 +4,30 @@ Backend API для сайта строительной компании.
 
 ## Установка на сервере
 
-### 1. Установка зависимостей
+### 1. Установка Node.js и npm (если не установлены)
+```bash
+# Установка Node.js 18 через NodeSource
+curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+sudo apt install -y nodejs
+
+# Проверка
+node --version
+npm --version
+```
+
+### 2. Установка зависимостей
 ```bash
 cd backend
 npm install
 ```
 
-### 2. Настройка переменных окружения
+### 3. Настройка переменных окружения
 ```bash
 cp .env.example .env
 # Отредактируйте .env файл
 ```
 
-### 3. Настройка Prisma
+### 4. Настройка Prisma
 ```bash
 # Убедитесь, что в .env указан DATABASE_URL:
 # DATABASE_URL=postgresql://eco-tech:eco-tech-password-db@localhost:5432/eco_tech
@@ -30,34 +41,49 @@ npm run prisma:migrate
 npx prisma db push
 ```
 
-### 3.1. Создание админа
+### 4.1. Создание админа
 ```bash
 # Создание админа с хэшированным паролем (Argon2)
 npm run create-admin
 # Username: admin, Password: admin
 ```
 
-### 3.2. Prisma Studio (опционально)
+### 4.2. Prisma Studio (опционально)
 ```bash
 # Открыть Prisma Studio для просмотра/редактирования данных
 npm run prisma:studio
 ```
 
-### 4. Сборка проекта
+### 5. Сборка проекта
 ```bash
 npm run build
 ```
 
-### 5. Запуск через Docker
+### 6. Запуск через Docker Compose (из корня проекта)
 ```bash
 docker compose up -d
 ```
 
-### 6. Настройка Nginx
+### 7. Настройка Nginx и SSL
 ```bash
-chmod +x setup-nginx.sh
-sudo ./setup-nginx.sh
+# Из корня проекта
+cd ..
+
+# Установка Certbot
+sudo apt install -y certbot
+
+# Получение SSL сертификата
+sudo certbot certonly --standalone -d ecotechstroy-dev.ru -d www.ecotechstroy-dev.ru
+
+# Копирование сертификатов
+sudo mkdir -p nginx/ssl
+sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/fullchain.pem nginx/ssl/
+sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/privkey.pem nginx/ssl/
+sudo chmod 644 nginx/ssl/fullchain.pem
+sudo chmod 600 nginx/ssl/privkey.pem
 ```
+
+**Подробная инструкция:** [SETUP.md](SETUP.md)
 
 ## API Endpoints
 
