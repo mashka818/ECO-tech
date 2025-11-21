@@ -1,0 +1,5 @@
+# SSL certificates directory
+# Place your SSL certificates here:
+# - fullchain.pem
+# - privkey.pem
+

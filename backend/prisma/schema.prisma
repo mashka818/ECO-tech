@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(255)
+  slug        String   @unique @db.VarChar(255)
+  subtitle    String?  @db.Text
+  area        String?  @db.VarChar(50)
+  dimensions  String?  @db.VarChar(50)
+  floors      Int      @default(1)
+  rooms       Int?
+  bathrooms   Int?
+  terraces    Int?
+  price       Decimal? @db.Decimal(12, 2)
+  description String?  @db.Text
+  mainImage   String?  @map("main_image") @db.VarChar(500)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  images ProjectImage[]
+
+  @@map("projects")
+}
+
+model ProjectImage {
+  id          Int      @id @default(autoincrement())
+  projectId   Int      @map("project_id")
+  imagePath   String   @map("image_path") @db.VarChar(500)
+  isMain      Boolean  @default(false) @map("is_main")
+  displayOrder Int     @default(0) @map("display_order")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("project_images")
+}
+
+model StaffPhoto {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(255)
+  position    String?  @db.VarChar(255)
+  imageFilename String @unique @map("image_filename") @db.VarChar(255)
+  displayOrder Int     @default(0) @map("display_order")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("staff_photos")
+}
+
+model Admin {
+  id          Int      @id @default(autoincrement())
+  username    String   @unique @db.VarChar(100)
+  passwordHash String  @map("password_hash") @db.VarChar(255)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("admins")
+}
+

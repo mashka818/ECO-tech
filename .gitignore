@@ -25,6 +25,10 @@ pnpm-lock.yaml
 backend/dist/
 backend/build/
 
+# Prisma
+backend/node_modules/.prisma/
+backend/prisma/migrations/
+
 # Frontend
 frontend/dist/
 frontend/build/
@@ -119,6 +123,14 @@ frontend/public/uploads/*
 postgres-data/
 mysql-data/
 mongo-data/
+
+# ============================================
+# SSL Certificates
+# ============================================
+nginx/ssl/*.pem
+nginx/ssl/*.key
+nginx/ssl/*.cert
+!nginx/ssl/.gitkeep
 
 # ============================================
 # Misc

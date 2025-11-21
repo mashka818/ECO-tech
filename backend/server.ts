@@ -1,9 +1,12 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { Pool } from 'pg';
+import cookieParser from 'cookie-parser';
+import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
 import path from 'path';
+import { prisma } from './prisma/client';
+import { swaggerSpec } from './config/swagger';
 
 dotenv.config();
 
@@ -11,41 +14,44 @@ const app = express();
 const PORT = parseInt(process.env.PORT || '3000', 10);
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://ecotechstroy-dev.ru',
+  credentials: true
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Database connection
-const pool = new Pool({
-  host: process.env.DATABASE_HOST || 'localhost',
-  port: parseInt(process.env.DATABASE_PORT || '5432'),
-  database: process.env.DATABASE_NAME || 'eco_tech',
-  user: process.env.DATABASE_USER || 'eco-tech',
-  password: process.env.DATABASE_PASSWORD || 'eco-tech-password-db',
-  max: 20,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
-});
-
-// Test database connection
-pool.on('connect', () => {
-  console.log('✅ Connected to PostgreSQL database');
-});
-
-pool.on('error', (err: Error) => {
-  console.error('❌ Unexpected error on idle client', err);
-  process.exit(-1);
-});
-
+/**
+ * @swagger
+ * /health:
+ *   get:
+ *     summary: Проверка здоровья сервера
+ *     tags: [Info]
+ *     responses:
+ *       200:
+ *         description: Сервер работает
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                 database:
+ *                   type: string
+ *                 timestamp:
+ *                   type: string
+ */
 // Health check endpoint
 app.get('/health', async (req: Request, res: Response) => {
   try {
-    const result = await pool.query('SELECT NOW()');
+    await prisma.$queryRaw`SELECT NOW()`;
     res.status(200).json({
       status: 'ok',
       database: 'connected',
-      timestamp: result.rows[0].now,
+      timestamp: new Date().toISOString(),
     });
   } catch (error) {
     const err = error as Error;
@@ -57,6 +63,27 @@ app.get('/health', async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Информация о API
+ *     tags: [Info]
+ *     responses:
+ *       200:
+ *         description: Информация о сервере
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 status:
+ *                   type: string
+ *                 version:
+ *                   type: string
+ */
 // Root endpoint
 app.get('/', (req: Request, res: Response) => {
   res.json({
@@ -66,8 +93,20 @@ app.get('/', (req: Request, res: Response) => {
   });
 });
 
-// API routes will be added here
-// app.use('/api', routes);
+// Swagger UI
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: 'ECO-tech API Documentation',
+}));
+
+// API routes
+import adminRoutes from './routes/admin';
+import projectsRoutes from './routes/projects';
+import staffRoutes from './routes/staff';
+
+app.use('/api/admin', adminRoutes);
+app.use('/api/projects', projectsRoutes);
+app.use('/api/staff', staffRoutes);
 
 // Error handling middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
@@ -95,13 +134,13 @@ app.listen(PORT, '0.0.0.0', () => {
 // Graceful shutdown
 process.on('SIGTERM', async () => {
   console.log('SIGTERM signal received: closing HTTP server');
-  await pool.end();
+  await prisma.$disconnect();
   process.exit(0);
 });
 
 process.on('SIGINT', async () => {
   console.log('SIGINT signal received: closing HTTP server');
-  await pool.end();
+  await prisma.$disconnect();
   process.exit(0);
 });
 

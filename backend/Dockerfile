@@ -7,9 +7,13 @@ WORKDIR /app
 # Копируем package.json и package-lock.json (если есть)
 COPY package*.json ./
 COPY tsconfig.json ./
+COPY prisma ./prisma
 
 # Устанавливаем зависимости
 RUN npm install
+
+# Генерируем Prisma Client
+RUN npm run prisma:generate
 
 # Копируем исходный код TypeScript
 COPY . .
