@@ -1,9 +1,10 @@
-# Временная заглушка для фронтенда
+# Фронтенд - статические файлы
 FROM nginx:alpine
 
-# Копируем статические файлы
-COPY . /usr/share/nginx/html
+# Копируем всю структуру frontend
+COPY . /usr/share/nginx/html/
 
-# Nginx уже настроен в основном контейнере
-# Этот Dockerfile нужен для сборки образа фронтенда
+# Nginx будет обслуживать файлы из /usr/share/nginx/html
+# Структура: /usr/share/nginx/html/pages/index.html
+# Uploads монтируются отдельно через volume в docker-compose
 

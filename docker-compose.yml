@@ -37,12 +37,11 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: eco_tech_frontend
-    volumes:
-      - ./frontend:/app
+    # Фронтенд монтируется в Nginx через volume, поэтому здесь не нужен volume
+    # Nginx будет обслуживать файлы из собранного образа
     restart: unless-stopped
     networks:
       - eco-tech-network
-    # Пока заглушка - будет настроено позже
 
   nginx:
     image: nginx:alpine
