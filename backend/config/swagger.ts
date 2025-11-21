@@ -11,16 +11,16 @@ const swaggerDefinition: SwaggerDefinition = {
       name: 'ECO-tech',
     },
   },
-  servers: [
-    {
-      url: 'http://81.177.216.84',
-      description: 'Production server (HTTP)',
-    },
-    {
-      url: 'http://localhost:3000',
-      description: 'Local development server',
-    },
-  ],
+      servers: [
+        {
+          url: 'https://ecotechstroy-dev.ru',
+          description: 'Production server (HTTPS)',
+        },
+        {
+          url: 'http://localhost:3000',
+          description: 'Local development server',
+        },
+      ],
   tags: [
     {
       name: 'Info',

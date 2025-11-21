@@ -121,11 +121,43 @@ app.get('/', (req: Request, res: Response) => {
   });
 });
 
-// Swagger UI
+// Swagger UI с динамическим определением сервера
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
   customCss: '.swagger-ui .topbar { display: none }',
   customSiteTitle: 'ECO-tech API Documentation',
+  swaggerOptions: {
+    url: '/docs/swagger.json',
+    persistAuthorization: true,
+    displayRequestDuration: true,
+  }
 }));
+
+// Swagger JSON endpoint с динамическим определением сервера
+app.get('/docs/swagger.json', (req: Request, res: Response) => {
+  const protocol = req.headers['x-forwarded-proto'] || req.protocol || 'https';
+  const host = req.headers.host || 'ecotechstroy-dev.ru';
+  const baseUrl = `${protocol}://${host}`;
+  
+  const swaggerSpecWithServer = {
+    ...swaggerSpec,
+    servers: [
+      {
+        url: baseUrl,
+        description: 'Current server',
+      },
+      {
+        url: 'https://ecotechstroy-dev.ru',
+        description: 'Production server (HTTPS)',
+      },
+      {
+        url: 'http://localhost:3000',
+        description: 'Local development server',
+      },
+    ],
+  };
+  
+  res.json(swaggerSpecWithServer);
+});
 
 // API routes
 import adminRoutes from './routes/admin';
