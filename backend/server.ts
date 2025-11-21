@@ -23,9 +23,10 @@ app.use(cors({
     
     // В production разрешаем только указанные origin
     if (process.env.NODE_ENV === 'production') {
+      // Разрешаем запросы без origin для Swagger UI и прямых запросов
       if (!origin) {
-        // Запросы без origin (например, Postman) блокируем в production
-        return callback(new Error('CORS: Origin is required in production'));
+        callback(null, true);
+        return;
       }
       
       if (allowedOrigins.indexOf(origin) !== -1) {
