@@ -20,6 +20,8 @@ services:
       # Не монтируем весь backend, чтобы не перезаписать собранный dist
       # Для разработки можно раскомментировать:
       # - ./backend:/app
+    ports:
+      - "3000:3000"  # Временно для доступа к Swagger напрямую
     restart: unless-stopped
     networks:
       - eco-tech-network

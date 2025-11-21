@@ -24,6 +24,10 @@ RUN npm run prisma:generate
 # Копируем исходный код TypeScript
 COPY . .
 
+# Копируем entrypoint скрипт
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Создаем директорию для uploads если её нет
 RUN mkdir -p uploads
 
@@ -38,6 +42,9 @@ RUN ls -la dist/ || echo "WARNING: dist directory not found"
 
 # Открываем порт
 EXPOSE 3000
+
+# Устанавливаем entrypoint
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Команда запуска приложения
 CMD ["npm", "start"]

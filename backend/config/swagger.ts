@@ -84,10 +84,10 @@ const swaggerDefinition: SwaggerDefinition = {
         type: 'object',
         properties: {
           id: { type: 'integer' },
-          name: { type: 'string', example: 'Иван Иванов' },
-          position: { type: 'string', example: 'Директор' },
+          fullName: { type: 'string', example: 'Иван Иванов', description: 'Полное ФИО сотрудника' },
+          position: { type: 'string', example: 'Директор', nullable: true },
           imageFilename: { type: 'string', example: 'ivan-ivanov-director.jpg' },
-          displayOrder: { type: 'integer' },
+          displayOrder: { type: 'integer', example: 0 },
           createdAt: { type: 'string', format: 'date-time' },
           updatedAt: { type: 'string', format: 'date-time' },
         },

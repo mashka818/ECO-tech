@@ -3,6 +3,7 @@ import { prisma } from '../prisma/client';
 import multer from 'multer';
 import path from 'path';
 import * as fs from 'fs';
+import { generateFilename } from '../utils/transliterate';
 
 const router = Router();
 
@@ -16,17 +17,16 @@ const storage = multer.diskStorage({
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
-    // Получаем имя и фамилию из тела запроса
-    const { firstName, lastName, position } = req.body;
+    // Получаем ФИО и должность из тела запроса
+    const { fullName, position } = req.body;
     
     // Формируем имя файла: ivan-ivanov-director.jpg
     let filename = '';
-    if (firstName && lastName) {
-      const namePart = `${firstName.toLowerCase()}-${lastName.toLowerCase()}`;
-      const positionPart = position ? `-${position.toLowerCase().replace(/\s+/g, '-')}` : '';
-      filename = `${namePart}${positionPart}${path.extname(file.originalname)}`;
+    if (fullName && fullName.trim()) {
+      const baseName = generateFilename(fullName, position);
+      filename = `${baseName}${path.extname(file.originalname)}`;
     } else {
-      // Если нет имени, используем timestamp
+      // Если нет ФИО, используем timestamp
       filename = `staff-${Date.now()}${path.extname(file.originalname)}`;
     }
     
@@ -84,6 +84,50 @@ router.get('/', async (req: Request, res: Response) => {
 
 /**
  * @swagger
+ * /api/staff/{id}:
+ *   get:
+ *     summary: Получить фотографию персонала по ID
+ *     tags: [Staff]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Фотография персонала
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/StaffPhoto'
+ *       404:
+ *         description: Фотография не найдена
+ */
+// Получить одну фотографию персонала по ID
+router.get('/:id', async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const staffPhotoId = parseInt(id);
+    
+    const staffPhoto = await prisma.staffPhoto.findUnique({
+      where: { id: staffPhotoId },
+    });
+    
+    if (!staffPhoto) {
+      res.status(404).json({ error: 'Staff photo not found' });
+      return;
+    }
+    
+    res.json(staffPhoto);
+  } catch (error) {
+    const err = error as Error;
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * @swagger
  * /api/staff:
  *   post:
  *     summary: Добавить фотографию персонала (только для админа)
@@ -98,21 +142,19 @@ router.get('/', async (req: Request, res: Response) => {
  *             type: object
  *             required:
  *               - photo
- *               - firstName
- *               - lastName
+ *               - fullName
  *             properties:
  *               photo:
  *                 type: string
  *                 format: binary
- *               firstName:
+ *               fullName:
  *                 type: string
- *                 example: Иван
- *               lastName:
- *                 type: string
- *                 example: Иванов
+ *                 example: Иван Иванов
+ *                 description: Полное ФИО сотрудника
  *               position:
  *                 type: string
  *                 example: Директор
+ *                 description: Должность сотрудника
  *     responses:
  *       201:
  *         description: Фотография добавлена
@@ -131,8 +173,13 @@ router.post('/', upload.single('photo'), async (req: Request, res: Response) => 
       return;
     }
     
-    const { firstName, lastName, position } = req.body;
-    const name = `${firstName} ${lastName}`.trim();
+    const { fullName, position } = req.body;
+    
+    if (!fullName || !fullName.trim()) {
+      res.status(400).json({ error: 'fullName is required' });
+      return;
+    }
+    
     const imageFilename = req.file.filename;
     
     // Получаем максимальный display_order
@@ -143,8 +190,8 @@ router.post('/', upload.single('photo'), async (req: Request, res: Response) => 
     
     const staffPhoto = await prisma.staffPhoto.create({
       data: {
-        name,
-        position: position || null,
+        fullName: fullName.trim(),
+        position: position ? position.trim() : null,
         imageFilename,
         displayOrder,
       },
@@ -180,14 +227,17 @@ router.post('/', upload.single('photo'), async (req: Request, res: Response) => 
  *               photo:
  *                 type: string
  *                 format: binary
- *               firstName:
+ *               fullName:
  *                 type: string
- *               lastName:
- *                 type: string
+ *                 example: Иван Иванов
+ *                 description: Полное ФИО сотрудника
  *               position:
  *                 type: string
+ *                 example: Директор
+ *                 description: Должность сотрудника
  *               display_order:
  *                 type: integer
+ *                 description: Порядок отображения
  *     responses:
  *       200:
  *         description: Фотография обновлена
@@ -199,8 +249,7 @@ router.put('/:id', upload.single('photo'), async (req: Request, res: Response) =
   try {
     const { id } = req.params;
     const staffPhotoId = parseInt(id);
-    const { firstName, lastName, position, display_order } = req.body;
-    const name = firstName && lastName ? `${firstName} ${lastName}`.trim() : undefined;
+    const { fullName, position, display_order } = req.body;
     
     // Проверяем существование записи
     const existing = await prisma.staffPhoto.findUnique({
@@ -212,24 +261,42 @@ router.put('/:id', upload.single('photo'), async (req: Request, res: Response) =
       return;
     }
     
-    // Если загружено новое изображение
+    // Если загружено новое изображение, удаляем старое
     if (req.file) {
-      // Удаляем старое изображение
       const oldFile = path.join(__dirname, '../uploads/staff', existing.imageFilename);
       if (fs.existsSync(oldFile)) {
         fs.unlinkSync(oldFile);
       }
     }
     
+    // Подготавливаем данные для обновления
+    const updateData: {
+      fullName?: string;
+      position?: string | null;
+      imageFilename?: string;
+      displayOrder?: number;
+    } = {};
+    
+    if (fullName !== undefined) {
+      updateData.fullName = fullName.trim();
+    }
+    
+    if (position !== undefined) {
+      updateData.position = position ? position.trim() : null;
+    }
+    
+    if (req.file) {
+      updateData.imageFilename = req.file.filename;
+    }
+    
+    if (display_order !== undefined) {
+      updateData.displayOrder = parseInt(display_order);
+    }
+    
     // Обновляем запись
     const staffPhoto = await prisma.staffPhoto.update({
       where: { id: staffPhotoId },
-      data: {
-        ...(name && { name }),
-        ...(position !== undefined && { position: position || null }),
-        ...(req.file && { imageFilename: req.file.filename }),
-        ...(display_order !== undefined && { displayOrder: parseInt(display_order) }),
-      },
+      data: updateData,
     });
     
     res.json(staffPhoto);

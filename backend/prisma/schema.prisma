@@ -47,7 +47,7 @@ model ProjectImage {
 
 model StaffPhoto {
   id          Int      @id @default(autoincrement())
-  name        String   @db.VarChar(255)
+  fullName    String   @map("full_name") @db.VarChar(255)
   position    String?  @db.VarChar(255)
   imageFilename String @unique @map("image_filename") @db.VarChar(255)
   displayOrder Int     @default(0) @map("display_order")
