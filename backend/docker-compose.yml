@@ -50,3 +50,4 @@ services:
       - PGPASSWORD=eco-tech-password-db
     restart: "no"
 
+
