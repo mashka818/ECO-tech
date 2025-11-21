@@ -20,8 +20,6 @@ services:
       # Не монтируем весь backend, чтобы не перезаписать собранный dist
       # Для разработки можно раскомментировать:
       # - ./backend:/app
-    ports:
-      - "3000:3000"  # Временно для доступа к Swagger напрямую
     restart: unless-stopped
     networks:
       - eco-tech-network
@@ -54,7 +52,7 @@ services:
       - "443:443"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./backend/nginx/ssl:/etc/nginx/ssl:ro
       - ./frontend:/usr/share/nginx/html:ro
       - ./backend/uploads:/var/www/uploads:ro
     depends_on:

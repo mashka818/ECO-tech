@@ -83,11 +83,11 @@ sudo certbot certonly --standalone -d ecotechstroy-dev.ru -d www.ecotechstroy-de
 sudo certbot certonly --standalone -d ecotechstroy-dev.ru -d www.ecotechstroy-dev.ru --register-unsafely-without-email --agree-tos --non-interactive
 
 # Копирование сертификатов
-sudo mkdir -p nginx/ssl
-sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/fullchain.pem nginx/ssl/
-sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/privkey.pem nginx/ssl/
-sudo chmod 644 nginx/ssl/fullchain.pem
-sudo chmod 600 nginx/ssl/privkey.pem
+sudo mkdir -p backend/nginx/ssl
+sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/fullchain.pem backend/nginx/ssl/
+sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/privkey.pem backend/nginx/ssl/
+sudo chmod 644 backend/nginx/ssl/fullchain.pem
+sudo chmod 600 backend/nginx/ssl/privkey.pem
 ```
 
 **Примечания:** 

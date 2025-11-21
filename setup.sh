@@ -70,11 +70,11 @@ cd ..
 
 # 8. Создание директорий для SSL
 echo "🔒 Создание директорий для SSL..."
-sudo mkdir -p nginx/ssl
-sudo chmod 755 nginx/ssl
+sudo mkdir -p backend/nginx/ssl
+sudo chmod 755 backend/nginx/ssl
 
 # 9. Установка SSL сертификата (если нужно)
-if [ ! -f nginx/ssl/fullchain.pem ]; then
+if [ ! -f backend/nginx/ssl/fullchain.pem ]; then
     echo "🔒 Установка SSL сертификата через Certbot..."
     sudo apt install -y certbot
     
@@ -102,10 +102,10 @@ if [ ! -f nginx/ssl/fullchain.pem ]; then
         
         # Копирование сертификатов
         if [ -f /etc/letsencrypt/live/ecotechstroy-dev.ru/fullchain.pem ]; then
-            sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/fullchain.pem nginx/ssl/
-            sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/privkey.pem nginx/ssl/
-            sudo chmod 644 nginx/ssl/fullchain.pem
-            sudo chmod 600 nginx/ssl/privkey.pem
+            sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/fullchain.pem backend/nginx/ssl/
+            sudo cp /etc/letsencrypt/live/ecotechstroy-dev.ru/privkey.pem backend/nginx/ssl/
+            sudo chmod 644 backend/nginx/ssl/fullchain.pem
+            sudo chmod 600 backend/nginx/ssl/privkey.pem
             echo "✅ SSL сертификаты успешно скопированы"
         else
             echo "⚠️  Не удалось получить сертификаты. Проверьте настройки DNS и доступность домена."
