@@ -11,6 +11,32 @@ datasource db {
 }
 
 // ============================================
+// LEGACY MODELS (для обратной совместимости)
+// ============================================
+
+// Старая модель проектов (deprecated, используйте House)
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(255)
+  slug        String   @unique @db.VarChar(255)
+  subtitle    String?  @db.Text
+  area        String?  @db.VarChar(50)
+  dimensions  String?  @db.VarChar(50)
+  floors      Int      @default(1)
+  rooms       Int?
+  bathrooms   Int?
+  terraces    Int?
+  price       Decimal? @db.Decimal(12, 2)
+  description String?  @db.Text
+  mainImage   String?  @map("main_image") @db.VarChar(500)
+  images      String[] @default([])
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("projects")
+}
+
+// ============================================
 // АКЦИИ И ПРОМО
 // ============================================
 

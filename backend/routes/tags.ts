@@ -111,9 +111,7 @@ router.get('/slug/:slug', async (req: Request, res: Response): Promise<void> => 
       include: {
         houses: {
           include: {
-            house: {
-              where: { isActive: true },
-            },
+            house: true,
           },
         },
       },
@@ -124,7 +122,13 @@ router.get('/slug/:slug', async (req: Request, res: Response): Promise<void> => 
       return;
     }
 
-    res.json(tag);
+    // Фильтруем только активные дома
+    const filteredTag = {
+      ...tag,
+      houses: tag.houses.filter((h) => h.house.isActive),
+    };
+
+    res.json(filteredTag);
   } catch (error) {
     const err = error as Error;
     res.status(500).json({ error: 'Failed to fetch tag', message: err.message });
