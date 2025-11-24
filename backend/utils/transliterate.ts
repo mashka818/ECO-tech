@@ -26,8 +26,26 @@ export function transliterate(text: string): string {
 /**
  * Конвертирует ФИО и должность в имя файла
  * Пример: "Иван Иванов", "Директор" -> "ivan-ivanov-director"
+ * 
+ * Для изображений (с расширением):
+ * generateFilename("Иван Иванов", ".jpg") -> "ivan-ivanov-<timestamp>.jpg"
  */
-export function generateFilename(fullName: string, position?: string | null): string {
+export function generateFilename(fullName: string, extension?: string | null): string {
+  // Если передано расширение файла (начинается с точки), это запрос для файла изображения
+  if (extension && extension.startsWith('.')) {
+    const timestamp = Date.now();
+    const namePart = transliterate(fullName.trim())
+      .replace(/\s+/g, '-')  // Заменяем пробелы на дефисы
+      .replace(/[^a-z0-9-]/g, '')  // Удаляем все кроме букв, цифр и дефисов
+      .replace(/-+/g, '-')  // Убираем множественные дефисы
+      .replace(/^-|-$/g, '');  // Убираем дефисы в начале и конце
+    
+    return `${namePart}-${timestamp}${extension}`;
+  }
+
+  // Старая логика для ФИО + должность (обратная совместимость)
+  const position = extension; // второй параметр может быть должностью
+  
   // Транслитерируем ФИО
   const namePart = transliterate(fullName.trim())
     .replace(/\s+/g, '-')  // Заменяем пробелы на дефисы
@@ -37,7 +55,7 @@ export function generateFilename(fullName: string, position?: string | null): st
 
   // Транслитерируем должность, если указана
   let positionPart = '';
-  if (position && position.trim()) {
+  if (position && position.trim() && !position.startsWith('.')) {
     positionPart = '-' + transliterate(position.trim())
       .replace(/\s+/g, '-')
       .replace(/[^a-z0-9-]/g, '')
@@ -46,5 +64,18 @@ export function generateFilename(fullName: string, position?: string | null): st
   }
 
   return `${namePart}${positionPart}`;
+}
+
+/**
+ * Генерирует slug из текста
+ * Пример: "Дом из клееного бруса «Истра»" -> "dom-iz-kleenogo-brusa-istra"
+ */
+export function generateSlug(text: string): string {
+  return transliterate(text.trim())
+    .replace(/[«»"']/g, '')  // Удаляем кавычки
+    .replace(/\s+/g, '-')  // Заменяем пробелы на дефисы
+    .replace(/[^a-z0-9-]/g, '')  // Удаляем все кроме букв, цифр и дефисов
+    .replace(/-+/g, '-')  // Убираем множественные дефисы
+    .replace(/^-|-$/g, '');  // Убираем дефисы в начале и конце
 }
 

@@ -10,25 +10,208 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Project {
-  id          Int      @id @default(autoincrement())
-  title       String   @db.VarChar(255)
-  slug        String   @unique @db.VarChar(255)
-  subtitle    String?  @db.Text
-  area        String?  @db.VarChar(50)
-  dimensions  String?  @db.VarChar(50)
-  floors      Int      @default(1)
-  rooms       Int?
-  bathrooms   Int?
-  terraces    Int?
-  price       Decimal? @db.Decimal(12, 2)
-  description String?  @db.Text
-  mainImage   String?  @map("main_image") @db.VarChar(500)
-  images      String[] @default([]) // Массив путей к изображениям
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+// ============================================
+// АКЦИИ И ПРОМО
+// ============================================
 
-  @@map("projects")
+// Акции для шапки (бегущая строка)
+model HeaderPromo {
+  id           Int      @id @default(autoincrement())
+  text         String   @db.VarChar(500)
+  link         String?  @db.VarChar(500)
+  isActive     Boolean  @default(true) @map("is_active")
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("header_promos")
+}
+
+// Акции и спецпредложения для главной страницы
+model HomePagePromo {
+  id           Int      @id @default(autoincrement())
+  title        String   @db.VarChar(255)
+  description  String   @db.Text
+  tag          String   @db.VarChar(100) // например: "Скидка 5%", "Специальное"
+  image        String   @db.VarChar(500)
+  link         String?  @db.VarChar(500)
+  isActive     Boolean  @default(true) @map("is_active")
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("homepage_promos")
+}
+
+// ============================================
+// ДОМА И ТЕГИ
+// ============================================
+
+// Теги для домов
+model Tag {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique @db.VarChar(100)
+  slug      String     @unique @db.VarChar(100)
+  color     String?    @db.VarChar(20) // для отображения цвета тега
+  createdAt DateTime   @default(now()) @map("created_at")
+  houses    HouseTag[]
+
+  @@map("tags")
+}
+
+// Дома (проекты)
+model House {
+  id    Int    @id @default(autoincrement())
+  title String @db.VarChar(255)
+  slug  String @unique @db.VarChar(255)
+
+  // Цены
+  regularPrice Decimal?  @map("regular_price") @db.Decimal(12, 2)
+  salePrice    Decimal?  @map("sale_price") @db.Decimal(12, 2)
+  saleEndDate  DateTime? @map("sale_end_date")
+
+  // Основные характеристики (обязательные из фигмы будут помечены как required в валидации)
+  area       String? @db.VarChar(50)
+  dimensions String? @db.VarChar(50)
+  floors     Int     @default(1)
+  rooms      Int?
+  bathrooms  Int?
+  terraces   Int?
+
+  // Описание
+  description      String? @db.Text
+  shortDescription String? @map("short_description") @db.VarChar(500)
+
+  // Изображения
+  mainImage String?  @map("main_image") @db.VarChar(500)
+  images    String[] @default([]) // Фотографии дома
+
+  // SEO
+  metaTitle       String? @map("meta_title") @db.VarChar(255)
+  metaDescription String? @map("meta_description") @db.VarChar(500)
+
+  // Служебные поля
+  isActive     Boolean  @default(true) @map("is_active")
+  viewCount    Int      @default(0) @map("view_count")
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  // Связи
+  tags            HouseTag[]
+  floorPlans      FloorPlan[]
+  priceInclusions PriceInclusion[]
+
+  @@map("houses")
+}
+
+// Связь многие-ко-многим между домами и тегами (максимум 4 тега на дом)
+model HouseTag {
+  houseId   Int
+  tagId     Int
+  isPrimary Boolean  @default(false) @map("is_primary") // Основной тег для похожих проектов
+  createdAt DateTime @default(now()) @map("created_at")
+
+  house House @relation(fields: [houseId], references: [id], onDelete: Cascade)
+  tag   Tag   @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([houseId, tagId])
+  @@map("house_tags")
+}
+
+// Планировки этажей
+model FloorPlan {
+  id          Int      @id @default(autoincrement())
+  houseId     Int      @map("house_id")
+  floorNumber Int      @map("floor_number") // 1, 2, 3
+  image       String   @db.VarChar(500)
+  title       String?  @db.VarChar(255) // например: "Первый этаж"
+  description String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  house House @relation(fields: [houseId], references: [id], onDelete: Cascade)
+
+  @@map("floor_plans")
+}
+
+// Что включено в цену
+model PriceInclusion {
+  id           Int      @id @default(autoincrement())
+  houseId      Int      @map("house_id")
+  item         String   @db.VarChar(500)
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  house House @relation(fields: [houseId], references: [id], onDelete: Cascade)
+
+  @@map("price_inclusions")
+}
+
+// ============================================
+// ГЛАВНАЯ СТРАНИЦА - СЕКЦИИ
+// ============================================
+
+// Первая секция (герой) с большими фото и видео
+model HeroSection {
+  id           Int      @id @default(autoincrement())
+  type         String   @db.VarChar(20) // "main_slider" (до 5 фото), "video_small" (2 видео)
+  mediaUrl     String   @map("media_url") @db.VarChar(500) // путь к фото или видео
+  title        String?  @db.VarChar(255)
+  description  String?  @db.Text
+  link         String?  @db.VarChar(500)
+  displayOrder Int      @default(0) @map("display_order")
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("hero_sections")
+}
+
+// Карточки с видео (секция "Видео построенных домов")
+model VideoCard {
+  id           Int      @id @default(autoincrement())
+  videoUrl     String   @map("video_url") @db.VarChar(500)
+  title        String   @db.VarChar(255)
+  description  String?  @db.Text
+  thumbnail    String?  @db.VarChar(500) // превью видео
+  displayOrder Int      @default(0) @map("display_order")
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("video_cards")
+}
+
+// Отзывы клиентов
+model Testimonial {
+  id           Int      @id @default(autoincrement())
+  projectName  String   @map("project_name") @db.VarChar(255)
+  clientName   String   @map("client_name") @db.VarChar(255)
+  testimonial  String   @db.Text
+  images       String[] @default([]) // до 10 фотографий
+  isActive     Boolean  @default(true) @map("is_active")
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("testimonials")
+}
+
+// ============================================
+// ЗАЯВКИ
+// ============================================
+
+// Форма обратной связи
+model ContactRequest {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(255)
+  phone       String   @db.VarChar(50)
+  message     String?  @db.Text
+  source      String?  @db.VarChar(100) // откуда пришла заявка (какая форма)
+  isProcessed Boolean  @default(false) @map("is_processed")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("contact_requests")
 }
 
 model Staff {

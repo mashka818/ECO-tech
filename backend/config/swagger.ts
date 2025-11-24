@@ -28,11 +28,55 @@ const swaggerDefinition: SwaggerDefinition = {
     },
     {
       name: 'Projects',
-      description: 'Управление проектами домов',
+      description: 'Управление проектами домов (legacy)',
     },
     {
       name: 'Staff',
       description: 'Управление персоналом',
+    },
+    {
+      name: 'HeaderPromos',
+      description: 'Акции для шапки сайта (бегущая строка)',
+    },
+    {
+      name: 'HomePagePromos',
+      description: 'Акции и спецпредложения на главной странице',
+    },
+    {
+      name: 'Tags',
+      description: 'Теги для домов',
+    },
+    {
+      name: 'Houses',
+      description: 'Управление домами (проектами)',
+    },
+    {
+      name: 'FloorPlans',
+      description: 'Планировки этажей домов',
+    },
+    {
+      name: 'PriceInclusions',
+      description: 'Что включено в цену дома',
+    },
+    {
+      name: 'HeroSections',
+      description: 'Первая секция главной страницы (фото и видео)',
+    },
+    {
+      name: 'VideoCards',
+      description: 'Карточки с видео на главной странице',
+    },
+    {
+      name: 'Testimonials',
+      description: 'Отзывы клиентов',
+    },
+    {
+      name: 'ContactRequests',
+      description: 'Заявки с форм обратной связи',
+    },
+    {
+      name: 'Search',
+      description: 'Поиск по сайту',
     },
   ],
   components: {

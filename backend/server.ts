@@ -160,9 +160,36 @@ import adminRoutes from './routes/admin';
 import projectsRoutes from './routes/projects';
 import staffRoutes from './routes/staff';
 
+// Новые роуты для конструктора сайта
+import headerPromosRoutes from './routes/header-promos';
+import homePagePromosRoutes from './routes/homepage-promos';
+import tagsRoutes from './routes/tags';
+import housesRoutes from './routes/houses';
+import floorPlansRoutes from './routes/floor-plans';
+import priceInclusionsRoutes from './routes/price-inclusions';
+import heroSectionsRoutes from './routes/hero-sections';
+import videoCardsRoutes from './routes/video-cards';
+import testimonialsRoutes from './routes/testimonials';
+import contactRequestsRoutes from './routes/contact-requests';
+import searchRoutes from './routes/search';
+
+// Подключаем старые роуты (для обратной совместимости)
 app.use('/api/admin', adminRoutes);
-app.use('/api/projects', projectsRoutes);
+app.use('/api/projects', projectsRoutes); // Оставляем для обратной совместимости
 app.use('/api/staff', staffRoutes);
+
+// Подключаем новые роуты
+app.use('/api/header-promos', headerPromosRoutes);
+app.use('/api/homepage-promos', homePagePromosRoutes);
+app.use('/api/tags', tagsRoutes);
+app.use('/api/houses', housesRoutes);
+app.use('/api', floorPlansRoutes); // Содержит /houses/:slug/floor-plans
+app.use('/api', priceInclusionsRoutes); // Содержит /houses/:slug/price-inclusions
+app.use('/api/hero-sections', heroSectionsRoutes);
+app.use('/api/video-cards', videoCardsRoutes);
+app.use('/api/testimonials', testimonialsRoutes);
+app.use('/api/contact-requests', contactRequestsRoutes);
+app.use('/api/search', searchRoutes);
 
 // Error handling middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
